@@ -38,6 +38,8 @@ export const createTestMesh = () => {
     ];
 
     const mesh = new THREE.Mesh(geometry, materials);
+    mesh.castShadow = true;
+    mesh.receiveShadow = false;
 
     return mesh;
 };

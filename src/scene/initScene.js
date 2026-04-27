@@ -4,6 +4,8 @@ import { createRenderer } from "./createRenderer";
 import { createTestMesh } from "./createTestMesh";
 import { createControls } from "./createControls";
 import { createLight } from "./createLight";
+import { createShadowPlane } from "./createShadowPlane";
+import { setupResizerHandler } from "./setupResizeHandler";
 
 export const initScene = (container) => {
     const scene = createScene();
@@ -13,10 +15,15 @@ export const initScene = (container) => {
     const testMesh = createTestMesh();
     scene.add(testMesh);
 
+    const shadowPlane = createShadowPlane();
+    scene.add(shadowPlane);
+
     const { ambientLight, mainLight } = createLight();
     scene.add(ambientLight, mainLight);
 
     const controls = createControls(camera, renderer);
+
+    setupResizerHandler({ container, camera, renderer });
 
     const animate = () => {
         controls.update();
