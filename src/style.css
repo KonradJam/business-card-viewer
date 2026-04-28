@@ -129,3 +129,30 @@ body {
   border-color: rgba(18, 18, 18, 0.24);
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.32);
 }
+
+.control-select {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(18, 18, 18, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.45);
+  color: #1a1a1a;
+  appearance: none;
+}
+
+.control-select:hover {
+  border-color: rgba(18, 18, 18, 0.18);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.control-select:focus {
+  outline: none;
+  border-color: rgba(18, 18, 18, 0.24);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.32);
+}
+
+.control-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(20, 20, 20, 0.62);
+}
