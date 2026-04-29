@@ -72,11 +72,6 @@ export const initScene = (container) => {
     applyCurrentCardFormat();
 
 
-
-    const applyCurrentCardFinish= () => {
-
-    };
-
     const paperSelect = document.querySelectorAll('[data-paper]');
     const foilSelect = document.querySelectorAll('[data-foil]');
 
