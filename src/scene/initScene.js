@@ -1,14 +1,14 @@
 import { createScene } from "./createScene";
 import { createCamera } from "./createCamera";
 import { createRenderer } from "./createRenderer";
-import { createTestMesh } from "./createTestMesh";
+import { createCard } from "./createCard.js";
 import { createControls } from "./createControls";
 import { createLights } from "./createLights.js";
 import { setupResizerHandler } from "./setupResizeHandler";
 import {
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
-} from '../config/cardFormats.js'
+} from '../card/cardFormats.js'
 import { rennderPdfToTexture } from "../pdf/renderPdfToTexture.js";
 
 export const initScene = (container) => {
@@ -16,12 +16,12 @@ export const initScene = (container) => {
     const camera = createCamera(container);
     const renderer = createRenderer(container);
     
-    const card = createTestMesh();
+    const card = createCard();
     scene.add(card.mesh);
 
 
-    const { ambientLight, frontLight, backLight } = createLights();
-    scene.add(ambientLight, frontLight, backLight);
+    const { ambientLight, frontLight, frontLightSecondary, backLight } = createLights();
+    scene.add(ambientLight, frontLight, frontLightSecondary, backLight);
 
     const controls = createControls(camera, renderer);
 
@@ -70,6 +70,40 @@ export const initScene = (container) => {
     });
 
     applyCurrentCardFormat();
+
+
+
+    const applyCurrentCardFinish= () => {
+
+    };
+
+    const paperSelect = document.querySelectorAll('[data-paper]');
+    const foilSelect = document.querySelectorAll('[data-foil]');
+
+    paperSelect.forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+            paperSelect.forEach((b) => b.classList.remove('is-active'));
+            
+            event.target.classList.add('is-active');
+            
+            card.finishState.paper = event.target.dataset.paper;
+            card.updateCardFinish(card.finishState.paper, card.finishState.foil);
+        });
+    });
+
+    foilSelect.forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+            foilSelect.forEach((b) => b.classList.remove('is-active'));
+                
+            event.target.classList.add('is-active');
+
+            card.finishState.foil = event.target.dataset.foil;
+            card.updateCardFinish(card.finishState.paper, card.finishState.foil)
+        });
+    });
+
+
+
 
     const animate = () => {
         controls.update();

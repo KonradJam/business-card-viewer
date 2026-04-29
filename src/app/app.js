@@ -4,7 +4,7 @@ import {
     CARD_ORIENTATION,
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
-} from '../config/cardFormats.js';
+} from '../card/cardFormats.js';
 
 
 export const createApp = () => {
@@ -56,6 +56,23 @@ export const createApp = () => {
                     <label class="control-group">
                         <span class="control-label">Back PDF</span>
                         <input id="back-pdf-input" type="file" accept="application/pdf" />
+                    </label>
+
+                    <label class="control-group" data-control="paper">
+                        <span class="control-label">Paper</span>
+                        <div class="btn-group">
+                            <button type="button" data-paper="mat" class="is-active">Mat</button>
+                            <button type="button" data-paper="glossy">Glossy</button>
+                        </div>
+                    </label>
+
+                    <label class="control-group" data-control="foil">
+                        <span class="control-label">Foil</span>
+                        <div class="btn-group">
+                            <button type="button" data-foil="none" class="is-active">None</button>
+                            <button type="button" data-foil="mat">Mat</button>
+                            <button type="button" data-foil="glossy">Glossy</button>
+                        </div>
                     </label>
                 </aside>
             </main>

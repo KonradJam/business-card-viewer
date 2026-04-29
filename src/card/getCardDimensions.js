@@ -1,4 +1,4 @@
-import { CARD_FORMATS, CARD_THICKNESS_MM } from "../config/cardFormats.js";
+import { CARD_FORMATS, CARD_THICKNESS_MM } from "./cardFormats.js";
 
 export const getCardDimensions = (formatId, orientation) => {
     const format = CARD_FORMATS.find((item) => item.id === formatId) ?? CARD_FORMATS[0];

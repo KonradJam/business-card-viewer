@@ -1,13 +1,16 @@
 import * as THREE from 'three';
 
 export const createLights = () => {
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 
     const frontLight = new THREE.DirectionalLight(0xffffff, 2.2);
-    frontLight.position.set(80, 120, 140);
+    frontLight.position.set(70, 40, 140);
+
+    const frontLightSecondary = new THREE.DirectionalLight(0xffffff, 1.1);
+    frontLightSecondary.position.set(-70, -40, 140);
 
     const backLight = new THREE.DirectionalLight(0xffffff, 2.2);
-    backLight.position.set(-80, 120, -140);
+    backLight.position.set(-80, 60, -140);
 
     const lightTarget = new THREE.Object3D();
     lightTarget.position.set(0, 0, 0);
@@ -26,5 +29,5 @@ export const createLights = () => {
     // frontLight.shadow.camera.top = 200;
     // frontLight.shadow.camera.bottom = -200;
 
-    return { ambientLight, frontLight, backLight, lightTarget };
+    return { ambientLight, frontLight, frontLightSecondary, backLight, lightTarget };
 };

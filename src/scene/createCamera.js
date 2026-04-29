@@ -5,7 +5,7 @@ export const createCamera = (container) => {
     const height = container.clientHeight;
 
     const camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 5000);
-    camera.position.set(0, 0, 260);
+    camera.position.set(-160, 0, 260);
 
     return camera;
 };
