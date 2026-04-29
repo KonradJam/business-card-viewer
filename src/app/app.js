@@ -23,7 +23,7 @@ export const createApp = () => {
     app.innerHTML = `
         <div class="app-shell">
             <header class="top-bar">
-                <h1class="app-title">Business Card Viewew</h1>
+                <h1 class="app-title">Business Card Viewew</h1>
             </header>
 
             <main class="workspace">
@@ -49,13 +49,13 @@ export const createApp = () => {
                     </p>
 
                     <label class="control-group">
-                        <span class="control-label">Front image</span>
-                        <input id="front-imagel-input" type="file" accept="image/*" />
+                        <span class="control-label">Front PDF</span>
+                        <input id="front-pdf-input" type="file" accept="application/pdf" />
                     </label>
 
                     <label class="control-group">
-                        <span class="control-label">Back image</span>
-                        <input id="back-image-input" type="file" accept="image/*" />
+                        <span class="control-label">Back PDF</span>
+                        <input id="back-pdf-input" type="file" accept="application/pdf" />
                     </label>
                 </aside>
             </main>

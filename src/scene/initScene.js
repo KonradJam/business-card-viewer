@@ -3,13 +3,13 @@ import { createCamera } from "./createCamera";
 import { createRenderer } from "./createRenderer";
 import { createTestMesh } from "./createTestMesh";
 import { createControls } from "./createControls";
-import { createLight } from "./createLight";
-import { createShadowPlane } from "./createShadowPlane";
+import { createLights } from "./createLights.js";
 import { setupResizerHandler } from "./setupResizeHandler";
 import {
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
 } from '../config/cardFormats.js'
+import { rennderPdfToTexture } from "../pdf/renderPdfToTexture.js";
 
 export const initScene = (container) => {
     const scene = createScene();
@@ -19,11 +19,9 @@ export const initScene = (container) => {
     const card = createTestMesh();
     scene.add(card.mesh);
 
-    const shadowPlane = createShadowPlane();
-    scene.add(shadowPlane);
 
-    const { ambientLight, mainLight } = createLight();
-    scene.add(ambientLight, mainLight);
+    const { ambientLight, frontLight, backLight } = createLights();
+    scene.add(ambientLight, frontLight, backLight);
 
     const controls = createControls(camera, renderer);
 
@@ -31,6 +29,8 @@ export const initScene = (container) => {
 
     const formatSelect = document.querySelector('#card-format-select');
     const orientationSelect = document.querySelector('#card-orientation-select');
+    const frontPdfInput = document.querySelector('#front-pdf-input');
+    const backPdfInput = document.querySelector('#back-pdf-input');
 
     const applyCurrentCardFormat = () => {
         const formatId = formatSelect?.value ?? DEFAULT_CARD_FORMAT_ID;
@@ -38,14 +38,36 @@ export const initScene = (container) => {
 
         const { heightMm } = card.setCardFormat({ formatId, orientation });
 
-        shadowPlane.position.y= -(heightMm / 2 + 8);
-
         controls.target.set(0, 0, 0);
         controls.update();
     };
 
+    const handlePdfUpload = async (file, side) => {
+        if (!file) return;
+
+        const { texture } = await rennderPdfToTexture(file);
+
+        if (side === 'front') {
+            card.updateFrontTexture(texture);
+        }
+
+        if (side === 'back') {
+            card.updateBackTexture(texture);
+        }
+    }
+
     formatSelect?.addEventListener('change', applyCurrentCardFormat);
     orientationSelect?.addEventListener('change', applyCurrentCardFormat);
+
+    frontPdfInput?.addEventListener('change', async (event) => {
+        const file = event.target.files?.[0];
+        await handlePdfUpload(file, 'front');
+    });
+
+    backPdfInput?.addEventListener('change', async (event) => {
+        const file = event.target.files?.[0];
+        await handlePdfUpload(file, 'back');
+    });
 
     applyCurrentCardFormat();
 

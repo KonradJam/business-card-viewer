@@ -1,22 +1,13 @@
 import * as THREE from 'three';
-import cardFrontTextureUrl from '../assets/card-front.jpg';
-import cardBackTextureUrl from '../assets/card-backt.jpg';
 import { getCardDimensions } from './getCardDimensions';
 import {
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
 } from '../config/cardFormats.js';
-import { texture } from 'three/tsl';
 
 export const createTestMesh = () => {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const textureLoader = new THREE.TextureLoader();
-
-    const cardFrontTexture = textureLoader.load(cardFrontTextureUrl);
-    cardFrontTexture.colorSpace = THREE.SRGBColorSpace;
-
-    const cardBackTexture = textureLoader.load(cardBackTextureUrl);
-    cardBackTexture.colorSpace = THREE.SRGBColorSpace;
 
     const edgeMaterial = new THREE.MeshStandardMaterial({
         color: 0xe8e6dc,
@@ -25,13 +16,13 @@ export const createTestMesh = () => {
     });
 
     const frontMaterial = new THREE.MeshStandardMaterial({
-        map: cardFrontTexture,
+        color: 0xffffff,
         roughness: 0.9,
         metalness: 0.05
     });
 
     const backMaterial = new THREE.MeshStandardMaterial({
-        map: cardBackTexture,
+        color: 0xffffff,
         roughness: 0.9,
         metalness: 0.05
     });
@@ -61,11 +52,15 @@ export const createTestMesh = () => {
     setCardFormat({ formatId: DEFAULT_CARD_FORMAT_ID, orientation: DEFAULT_CARD_ORIENTATION });
 
     const updateFrontTexture = (texture) => {
+        texture.colorSpace = THREE.SRGBColorSpace;
+        frontMaterial.color.set(0xffffff);
         frontMaterial.map = texture;
         frontMaterial.needsUpdate = true;
     };
 
     const updateBackTexture = (texture) => {
+        texture.colorSpace = THREE.SRGBColorSpace;
+        backMaterial.color.set(0xffffff);
         backMaterial.map = texture;
         backMaterial.needsUpdate = true;
     };
