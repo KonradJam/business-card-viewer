@@ -10,7 +10,10 @@ export const createLights = () => {
     frontLightSecondary.position.set(-70, -40, 140);
 
     const backLight = new THREE.DirectionalLight(0xffffff, 2.2);
-    backLight.position.set(-80, 60, -140);
+    backLight.position.set(-70, 40, -140);
+
+    const backLightSecondary = new THREE.DirectionalLight(0xffffff, 2.1);
+    backLightSecondary.position.set(70, -40, -140);
 
     const lightTarget = new THREE.Object3D();
     lightTarget.position.set(0, 0, 0);
@@ -29,5 +32,10 @@ export const createLights = () => {
     // frontLight.shadow.camera.top = 200;
     // frontLight.shadow.camera.bottom = -200;
 
-    return { ambientLight, frontLight, frontLightSecondary, backLight, lightTarget };
+    return { ambientLight, 
+        frontLight, 
+        frontLightSecondary, 
+        backLight,
+        backLightSecondary, 
+        lightTarget };
 };

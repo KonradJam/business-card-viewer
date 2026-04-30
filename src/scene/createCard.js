@@ -61,14 +61,12 @@ export const createCard = () => {
     setCardFormat({ formatId: DEFAULT_CARD_FORMAT_ID, orientation: DEFAULT_CARD_ORIENTATION });
 
     const updateFrontTexture = (texture) => {
-        texture.colorSpace = THREE.SRGBColorSpace;
         frontMaterial.color.set(0xffffff);
         frontMaterial.map = texture;
         frontMaterial.needsUpdate = true;
     };
 
     const updateBackTexture = (texture) => {
-        texture.colorSpace = THREE.SRGBColorSpace;
         backMaterial.color.set(0xffffff);
         backMaterial.map = texture;
         backMaterial.needsUpdate = true;

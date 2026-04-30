@@ -66,6 +66,16 @@ export const createApp = () => {
                         <input id="back-pdf-input" type="file" accept="application/pdf" />
                     </fieldset>
 
+                    <fieldset class="control-group">
+                        <legend class="control-label">Front spot UV PDF</legend>
+                        <input id="front-uv-pdf-input" type="file" accept="application/pdf" />
+                    </fieldset>
+
+                    <fieldset class="control-group">
+                        <legend class="control-label">Back spot UV PDF</legend>
+                        <input id="back-uv-pdf-input" type="file" accept="application/pdf" />
+                    </fieldset>
+
                     <fieldset class="control-group" data-control="paper">
                         <legend class="control-label">Paper</legend>
                         <div class="btn-group">

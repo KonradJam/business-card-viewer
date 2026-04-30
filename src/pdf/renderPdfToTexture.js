@@ -4,7 +4,13 @@ import * as THREE from 'three';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
-export const rennderPdfToTexture = async (file) => {
+export const renderPdfToTexture = async (
+    file, {
+        targetWidth = 1600,
+        colorSpace = THREE.SRGBColorSpace,
+        invert = false
+    }
+) => {
     const buffer = await file.arrayBuffer();
 
     const loadingTask = pdfjsLib.getDocument({ data: buffer });
@@ -12,7 +18,6 @@ export const rennderPdfToTexture = async (file) => {
     const page = await pdf.getPage(1);
 
     const baseViewport = page.getViewport({ scale: 1 });
-    const targetWidth = 1600;
     const scale = targetWidth / baseViewport.width;
     const viewport = page.getViewport({ scale });
 
@@ -34,11 +39,25 @@ export const rennderPdfToTexture = async (file) => {
         transform
     }).promise;
 
+    if (invert) {
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+            data[i] = 255 - data[i];
+            data[i + 1] = 255 - data[i + 1];
+            data[i + 2] = 255 - data[i + 2];
+        }
+        context.putImageData(imageData, 0, 0);
+    }
+
     const texture = new THREE.CanvasTexture(canvas);
-    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.colorSpace = colorSpace;
+    texture.needsUpdate = true;
 
     return {
         texture,
+        canvas,
         width: viewport.width,
         height: viewport.height,
         pageCount: pdf.numPages

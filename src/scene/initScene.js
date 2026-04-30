@@ -10,7 +10,7 @@ import {
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
 } from '../card/cardFormats.js'
-import { rennderPdfToTexture } from "../pdf/renderPdfToTexture.js";
+import { renderPdfToTexture } from "../pdf/renderPdfToTexture.js";
 
 export const initScene = (container) => {
     const scene = createScene();
@@ -21,8 +21,8 @@ export const initScene = (container) => {
     scene.add(card.mesh);
 
 
-    const { ambientLight, frontLight, frontLightSecondary, backLight } = createLights();
-    scene.add(ambientLight, frontLight, frontLightSecondary, backLight);
+    const { ambientLight, frontLight, frontLightSecondary, backLight, backLightSecondary } = createLights();
+    scene.add( ambientLight, frontLight, frontLightSecondary, backLight, backLightSecondary );
 
     const controls = createControls(camera, renderer);
 
@@ -39,8 +39,12 @@ export const initScene = (container) => {
 
     const formatSelect = document.querySelector('#card-format-select');
     const orientationSelect = document.querySelector('#card-orientation-select');
+
     const frontPdfInput = document.querySelector('#front-pdf-input');
     const backPdfInput = document.querySelector('#back-pdf-input');
+
+    const frontUvPdfInput = document.querySelector('#front-uv-pdf-input');
+    const backUvPdfInput = document.querySelector('#back-uv-pdf-input');
 
     const applyCurrentCardFormat = () => {
         const formatId = formatSelect?.value ?? DEFAULT_CARD_FORMAT_ID;
@@ -55,7 +59,7 @@ export const initScene = (container) => {
     const handlePdfUpload = async (file, side) => {
         if (!file) return;
 
-        const { texture } = await rennderPdfToTexture(file);
+        const { texture } = await renderPdfToTexture(file, {});
 
         if (side === 'front') {
             card.updateFrontTexture(texture);
