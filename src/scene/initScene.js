@@ -75,29 +75,22 @@ export const initScene = (container) => {
     const paperSelect = document.querySelectorAll('[data-paper]');
     const foilSelect = document.querySelectorAll('[data-foil]');
 
-    paperSelect.forEach((btn) => {
-        btn.addEventListener('click', (event) => {
-            paperSelect.forEach((b) => b.classList.remove('is-active'));
-            
-            event.target.classList.add('is-active');
-            
-            card.finishState.paper = event.target.dataset.paper;
-            card.updateCardFinish(card.finishState.paper, card.finishState.foil);
-        });
-    });
-
-    foilSelect.forEach((btn) => {
-        btn.addEventListener('click', (event) => {
-            foilSelect.forEach((b) => b.classList.remove('is-active'));
+    const setupToggleGroup = (buttons, material) => { 
+        buttons.forEach((btn) => {
+            btn.addEventListener('click', (event) => {
+                buttons.forEach((b) => b.classList.remove('is-active'));
                 
-            event.target.classList.add('is-active');
-
-            card.finishState.foil = event.target.dataset.foil;
-            card.updateCardFinish(card.finishState.paper, card.finishState.foil)
+                const button = event.currentTarget;
+                button.classList.add('is-active');
+                
+                card.finishState[material] = button.dataset[material];
+                card.updateCardFinish(card.finishState.paper, card.finishState.foil);
+            });
         });
-    });
+    };
 
-
+    setupToggleGroup(paperSelect, 'paper');
+    setupToggleGroup(foilSelect, 'foil');
 
 
     const animate = () => {

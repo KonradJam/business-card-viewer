@@ -74,12 +74,14 @@ export const createCard = () => {
         backMaterial.needsUpdate = true;
     };
 
+    const FINISH_SETTINGS = ['roughness', 'clearcoat', 'clearcoatRoughness'];
+
     const updateCardFinish = (paper, foil) => {
         const finishGroup = foil === 'none' ? 'paper' : 'foil';
         const finishKey = foil === 'none' ? paper : foil;
         const preset = FINISH_PRESETS[finishGroup][finishKey];
 
-        for (const setting of ['roughness', 'clearcoat', 'clearcoatRoughness']) {
+        for (const setting of FINISH_SETTINGS) {
             frontMaterial[setting] = preset[setting];
             backMaterial[setting] = preset[setting];
         }
