@@ -30,50 +30,58 @@ export const createApp = () => {
                 <div id="scene-container"></div>
 
                 <aside class="control-panel">
-                    <label class="control-group">
-                        <span class="control-label">Business card format</span>
+                    <fieldset class="control-group">
+                        <legend class="control-label">Business card format</legend>
                         <select id="card-format-select" class="control-select">
                             ${formatOptions}
                         </select>
-                    </label>
+                    </fieldset>
 
-                    <label class="control-group">
-                        <span class="control-label">Orientation</span>
+                    <fieldset class="control-group">
+                        <legend class="control-label">Orientation</legend>
                         <select id="card-orientation-select" class="control-select">
                             ${orientationOptions}
                         </select>
-                    </label>
+                    </fieldset>
 
                     <p class="control-hint">
                        Changing the format updates the 3D object immediately. 
                     </p>
 
-                    <label class="control-group">
-                        <span class="control-label">Front PDF</span>
+                    <fieldset class="control-group">
+                        <legend class="control-label">Position reset</legend>
+                        <div class="btn-group">
+                            <button type="button" data-position="front">Front</button>
+                            <button type="button" data-position="back">Back</button>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="control-group">
+                        <legend class="control-label">Front PDF</legend>
                         <input id="front-pdf-input" type="file" accept="application/pdf" />
-                    </label>
+                    </fieldset>
 
-                    <label class="control-group">
-                        <span class="control-label">Back PDF</span>
+                    <fieldset class="control-group">
+                        <legend class="control-label">Back PDF</legend>
                         <input id="back-pdf-input" type="file" accept="application/pdf" />
-                    </label>
+                    </fieldset>
 
-                    <label class="control-group" data-control="paper">
-                        <span class="control-label">Paper</span>
+                    <fieldset class="control-group" data-control="paper">
+                        <legend class="control-label">Paper</legend>
                         <div class="btn-group">
                             <button type="button" data-paper="mat" class="is-active">Mat</button>
                             <button type="button" data-paper="glossy">Glossy</button>
                         </div>
-                    </label>
+                    </fieldset>
 
-                    <label class="control-group" data-control="foil">
-                        <span class="control-label">Foil</span>
+                    <fieldset class="control-group" data-control="foil">
+                        <legend class="control-label">Foil</legend>
                         <div class="btn-group">
                             <button type="button" data-foil="none" class="is-active">None</button>
                             <button type="button" data-foil="mat">Mat</button>
                             <button type="button" data-foil="glossy">Glossy</button>
                         </div>
-                    </label>
+                    </fieldset>
                 </aside>
             </main>
         </div>

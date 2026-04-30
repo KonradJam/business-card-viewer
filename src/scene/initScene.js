@@ -1,5 +1,6 @@
 import { createScene } from "./createScene";
 import { createCamera } from "./createCamera";
+import { setCameraView } from "../camera/setCameraView.js";
 import { createRenderer } from "./createRenderer";
 import { createCard } from "./createCard.js";
 import { createControls } from "./createControls";
@@ -26,6 +27,15 @@ export const initScene = (container) => {
     const controls = createControls(camera, renderer);
 
     setupResizerHandler({ container, camera, renderer });
+
+    const positionSelect = document.querySelectorAll('[data-position]');
+
+    positionSelect.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const position = event.currentTarget.dataset.position;
+            setCameraView(camera, controls, position);
+        });
+    });
 
     const formatSelect = document.querySelector('#card-format-select');
     const orientationSelect = document.querySelector('#card-orientation-select');
