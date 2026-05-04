@@ -13,9 +13,9 @@ export const FINISH_PRESETS = {
     },
     foil: {
         mat: {
-            roughness: 0.88,
-            clearcoat: 0.06,
-            clearcoatRoughness: 0.55,
+            roughness: 0.9,
+            clearcoat: 0.00,
+            clearcoatRoughness: 0.0,
         },
         glossy: {
             roughness: 0.33,

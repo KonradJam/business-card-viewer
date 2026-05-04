@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import { createScene } from "./createScene";
 import { createCamera } from "./createCamera";
 import { setCameraView } from "../camera/setCameraView.js";
@@ -59,19 +60,54 @@ export const initScene = (container) => {
     const handlePdfUpload = async (file, side) => {
         if (!file) return;
 
-        const { texture } = await renderPdfToTexture(file, {});
+        if (side === 'front' || side === 'back') {
+            const { texture } = await renderPdfToTexture(file, {});
+            
+            if (side === 'front') {
+                card.updateFrontTexture(texture);
+            }
 
-        if (side === 'front') {
-            card.updateFrontTexture(texture);
+            if (side === 'back') {
+                card.updateBackTexture(texture);
+            }
+        } else {
+            const { texture } = await renderPdfToTexture(file, {
+                colorSpace: THREE.NoColorSpace,
+                invert: true
+            });
+
+            if (side === 'frontUV') {
+                card.updateFrontUvTexture(texture);
+            }
+    
+            if (side === 'backUV') {
+                card.updateBackUvTexture(texture);
+            }
         }
 
-        if (side === 'back') {
-            card.updateBackTexture(texture);
-        }
     }
 
     formatSelect?.addEventListener('change', applyCurrentCardFormat);
     orientationSelect?.addEventListener('change', applyCurrentCardFormat);
+    
+    const paperSelect = document.querySelectorAll('[data-paper]');
+    const foilSelect = document.querySelectorAll('[data-foil]');
+
+    const setFinishForUv = () => {
+        paperSelect.forEach((btn) => {
+            btn.classList.remove('is-active');
+            if (btn.dataset.paper === 'mat') {
+                btn.classList.add('is-active');
+            }
+        });
+        foilSelect.forEach((btn) => {
+            btn.classList.remove('is-active');
+            if (btn.dataset.foil === 'mat') {
+                btn.classList.add('is-active');
+            }
+        });
+
+    };
 
     frontPdfInput?.addEventListener('change', async (event) => {
         const file = event.target.files?.[0];
@@ -83,11 +119,19 @@ export const initScene = (container) => {
         await handlePdfUpload(file, 'back');
     });
 
+    frontUvPdfInput?.addEventListener('change', async (event) => {
+        const file = event.target.files?.[0];
+        await handlePdfUpload(file, 'frontUV');
+        setFinishForUv();
+    });
+
+    backUvPdfInput?.addEventListener('change', async (event) => {
+        const file = event.target.files?.[0];
+        await handlePdfUpload(file, 'backUV');
+        setFinishForUv();
+    });
+
     applyCurrentCardFormat();
-
-
-    const paperSelect = document.querySelectorAll('[data-paper]');
-    const foilSelect = document.querySelectorAll('[data-foil]');
 
     const setupToggleGroup = (buttons, material) => { 
         buttons.forEach((btn) => {
@@ -105,7 +149,6 @@ export const initScene = (container) => {
 
     setupToggleGroup(paperSelect, 'paper');
     setupToggleGroup(foilSelect, 'foil');
-
 
     const animate = () => {
         controls.update();

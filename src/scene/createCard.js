@@ -5,6 +5,8 @@ import {
     DEFAULT_CARD_ORIENTATION
 } from '../card/cardFormats.js';
 import { FINISH_PRESETS } from '../card/finishPresets.js';
+import { FINISH_UV_PRESETS } from '../card/finishUvPresets.js';
+import { texture } from 'three/tsl';
 
 export const createCard = () => {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -72,6 +74,30 @@ export const createCard = () => {
         backMaterial.needsUpdate = true;
     };
 
+    const updateFrontUvTexture = (texture) => {
+        frontMaterial.roughness = FINISH_PRESETS['foil']['mat']['roughness'];
+        backMaterial.roughness = FINISH_PRESETS['foil']['mat']['roughness'];
+
+        frontMaterial.clearcoatMap = texture;
+        frontMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
+        frontMaterial.clearcoatRoughness = FINISH_UV_PRESETS['standard']['clearcoatRoughness'];
+
+        frontMaterial.needsUpdate = true;
+        backMaterial.needsUpdate = true;
+    };
+
+    const updateBackUvTexture = (texture) => {
+        backMaterial.roughness = FINISH_PRESETS['foil']['mat']['roughness'];
+        frontMaterial.roughness = FINISH_PRESETS['foil']['mat']['roughness'];
+
+        backMaterial.clearcoatMap = texture;
+        backMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
+        backMaterial.clearcoatRoughness = FINISH_UV_PRESETS['standard']['clearcoatRoughness'];
+
+        frontMaterial.needsUpdate = true;
+        backMaterial.needsUpdate = true;
+    };
+
     const FINISH_SETTINGS = ['roughness', 'clearcoat', 'clearcoatRoughness'];
 
     const updateCardFinish = (paper, foil) => {
@@ -88,5 +114,8 @@ export const createCard = () => {
         backMaterial.needsUpdate = true;
     };
 
-    return { mesh, setCardFormat, updateFrontTexture, updateBackTexture, updateCardFinish, finishState };
+    return { mesh, setCardFormat,
+        updateFrontTexture, updateBackTexture,
+        updateFrontUvTexture, updateBackUvTexture,
+        updateCardFinish, finishState };
 };
