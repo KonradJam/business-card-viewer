@@ -5,6 +5,7 @@ import {
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
 } from '../card/cardFormats.js';
+import { menu } from '../menu/menu.js';
 
 
 export const createApp = () => {
@@ -58,22 +59,38 @@ export const createApp = () => {
 
                     <fieldset class="control-group">
                         <legend class="control-label">Front PDF</legend>
-                        <input id="front-pdf-input" type="file" accept="application/pdf" />
+                        <div class="control-select control-upload">
+                            <label for="front-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
+                            <span class="upload-text">No file chosen</span>
+                            <input id="front-pdf-input" type="file" accept="application/pdf" />
+                        </div>
                     </fieldset>
 
                     <fieldset class="control-group">
                         <legend class="control-label">Back PDF</legend>
-                        <input id="back-pdf-input" type="file" accept="application/pdf" />
+                        <div class="control-select control-upload">
+                            <label for="back-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
+                            <span class="upload-text">No file chosen</span>
+                            <input id="back-pdf-input" type="file" accept="application/pdf" />
+                        </div>
                     </fieldset>
 
                     <fieldset class="control-group">
                         <legend class="control-label">Front spot UV PDF</legend>
-                        <input id="front-uv-pdf-input" type="file" accept="application/pdf" />
+                        <div class="control-select control-upload">
+                            <label for="front-uv-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
+                            <span class="upload-text">No file chosen</span>
+                            <input id="front-uv-pdf-input" type="file" accept="application/pdf" />
+                        </div>
                     </fieldset>
 
                     <fieldset class="control-group">
                         <legend class="control-label">Back spot UV PDF</legend>
-                        <input id="back-uv-pdf-input" type="file" accept="application/pdf" />
+                        <div class="control-select control-upload">
+                            <label for="back-uv-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
+                            <span class="upload-text">No file chosen</span>
+                            <input id="back-uv-pdf-input" type="file" accept="application/pdf" />
+                        <div>
                     </fieldset>
 
                     <fieldset class="control-group" data-control="paper">
@@ -98,4 +115,5 @@ export const createApp = () => {
     `;
 
     createSceneContainer();
+    menu();
 };
