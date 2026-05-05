@@ -12,7 +12,7 @@ export const createLights = () => {
     const backLight = new THREE.DirectionalLight(0xffffff, 2.2);
     backLight.position.set(-90, 20, -140);
 
-    const backLightSecondary = new THREE.DirectionalLight(0xffffff, 2.1);
+    const backLightSecondary = new THREE.DirectionalLight(0xffffff, 1.1);
     backLightSecondary.position.set(90, -20, -140);
 
     const lightTarget = new THREE.Object3D();

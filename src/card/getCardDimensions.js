@@ -6,5 +6,5 @@ export const getCardDimensions = (formatId, orientation) => {
     const widthMm = orientation === 'portrait' ? format.heightMm : format.widthMm;
     const heightMm = orientation === 'portrait' ? format.widthMm : format.heightMm;
 
-    return { widthMm, heightMm, depthMM: CARD_THICKNESS_MM };
+    return { widthMm, heightMm, depthMm: CARD_THICKNESS_MM };
 };

@@ -55,6 +55,8 @@ export const createCard = () => {
     const setCardFormat = ({ formatId, orientation }) => {
         const { widthMm, heightMm, depthMm } = getCardDimensions(formatId, orientation);
 
+        console.log(widthMm);
+
         mesh.scale.set(widthMm, heightMm, depthMm);
 
         return { widthMm, heightMm, depthMm };
