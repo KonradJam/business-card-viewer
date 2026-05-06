@@ -32,14 +32,14 @@ export const createApp = () => {
 
                 <aside class="control-panel">
                     <fieldset class="control-group">
-                        <legend class="control-label">Business card format</legend>
+                        <legend class="control-legend">Business card format</legend>
                         <select id="card-format-select" class="control-select">
                             ${formatOptions}
                         </select>
                     </fieldset>
 
                     <fieldset class="control-group">
-                        <legend class="control-label">Orientation</legend>
+                        <legend class="control-legend">Orientation</legend>
                         <select id="card-orientation-select" class="control-select">
                             ${orientationOptions}
                         </select>
@@ -49,52 +49,60 @@ export const createApp = () => {
                        Changing the format updates the 3D object immediately. 
                     </p>
 
+                    <hr class="divider">
+
                     <fieldset class="control-group">
-                        <legend class="control-label">Position reset</legend>
+                        <legend class="control-legend">Position reset</legend>
                         <div class="btn-group">
                             <button type="button" data-position="front">Front</button>
                             <button type="button" data-position="back">Back</button>
                         </div>
                     </fieldset>
 
-                    <fieldset class="control-group">
-                        <legend class="control-label">Front PDF</legend>
+                    <hr class="divider">
+
+                    <details class="control-group" open>
+                        <summary class="control-legend">Front PDF</summary>
                         <div class="control-select control-upload">
                             <label for="front-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
                             <input id="front-pdf-input" type="file" accept="application/pdf" />
                         </div>
-                    </fieldset>
+                    </details>
 
-                    <fieldset class="control-group">
-                        <legend class="control-label">Back PDF</legend>
+                    <details class="control-group">
+                        <summary class="control-legend">Back PDF</summary>
                         <div class="control-select control-upload">
                             <label for="back-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
                             <input id="back-pdf-input" type="file" accept="application/pdf" />
                         </div>
-                    </fieldset>
+                    </details>
 
-                    <fieldset class="control-group">
-                        <legend class="control-label">Front spot UV PDF</legend>
+                    <hr class="divider">
+
+                    <details class="control-group">
+                        <summary class="control-legend">Front spot UV PDF</summary>
                         <div class="control-select control-upload">
                             <label for="front-uv-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
                             <input id="front-uv-pdf-input" type="file" accept="application/pdf" />
                         </div>
-                    </fieldset>
+                    </details>
 
-                    <fieldset class="control-group">
-                        <legend class="control-label">Back spot UV PDF</legend>
+                    <details class="control-group">
+                        <summary class="control-legend">Back spot UV PDF</summary>
                         <div class="control-select control-upload">
                             <label for="back-uv-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
                             <input id="back-uv-pdf-input" type="file" accept="application/pdf" />
                         <div>
-                    </fieldset>
+                    </details>
+
+                    <hr class="divider">
 
                     <fieldset class="control-group" data-control="paper">
-                        <legend class="control-label">Paper</legend>
+                        <summary class="control-legend">Paper</summary>
                         <div class="btn-group">
                             <button type="button" data-paper="mat" class="is-active">Mat</button>
                             <button type="button" data-paper="glossy">Glossy</button>
@@ -102,7 +110,7 @@ export const createApp = () => {
                     </fieldset>
 
                     <fieldset class="control-group" data-control="foil">
-                        <legend class="control-label">Foil</legend>
+                        <legend class="control-legend">Foil</legend>
                         <div class="btn-group">
                             <button type="button" data-foil="none" class="is-active">None</button>
                             <button type="button" data-foil="mat">Mat</button>
