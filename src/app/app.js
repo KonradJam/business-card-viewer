@@ -67,6 +67,12 @@ export const createApp = () => {
                             <label for="front-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
                             <input id="front-pdf-input" type="file" accept="application/pdf" />
+                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         </div>
                     </details>
 
@@ -76,6 +82,12 @@ export const createApp = () => {
                             <label for="back-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
                             <input id="back-pdf-input" type="file" accept="application/pdf" />
+                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         </div>
                     </details>
 
@@ -87,6 +99,12 @@ export const createApp = () => {
                             <label for="front-uv-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
                             <input id="front-uv-pdf-input" type="file" accept="application/pdf" />
+                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         </div>
                     </details>
 
@@ -96,6 +114,12 @@ export const createApp = () => {
                             <label for="back-uv-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
                             <input id="back-uv-pdf-input" type="file" accept="application/pdf" />
+                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
                         <div>
                     </details>
 

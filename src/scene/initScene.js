@@ -58,34 +58,36 @@ export const initScene = (container) => {
     };
 
     const handlePdfUpload = async (file, side) => {
-        if (!file) return;
-
-        if (side === 'front' || side === 'back') {
-            const { texture } = await renderPdfToTexture(file, {});
-            
-            if (side === 'front') {
-                card.updateFrontTexture(texture);
-            }
-
-            if (side === 'back') {
-                card.updateBackTexture(texture);
-            }
-        } else {
-            const { texture } = await renderPdfToTexture(file, {
-                colorSpace: THREE.NoColorSpace,
-                invert: true
-            });
-
-            if (side === 'frontUV') {
-                card.updateFrontUvTexture(texture);
-            }
-    
-            if (side === 'backUV') {
-                card.updateBackUvTexture(texture);
-            }
-        }
-
+    if (!file) {
+        if (side === 'front') card.updateFrontTexture(null);
+        else if (side === 'back') card.updateBackTexture(null);
+        else if (side === 'frontUV') card.updateFrontUvTexture(null);
+        else if (side === 'backUV') card.updateBackUvTexture(null);
+        
+        return; 
     }
+
+    if (side === 'front' || side === 'back') {
+        const { texture } = await renderPdfToTexture(file, {});
+        
+        if (side === 'front') {
+            card.updateFrontTexture(texture);
+        } else if (side === 'back') {
+            card.updateBackTexture(texture);
+        }
+    } else {
+        const { texture } = await renderPdfToTexture(file, {
+            colorSpace: THREE.NoColorSpace,
+            invert: true
+        });
+
+        if (side === 'frontUV') {
+            card.updateFrontUvTexture(texture);
+        } else if (side === 'backUV') {
+            card.updateBackUvTexture(texture);
+        }
+    }
+};
 
     formatSelect?.addEventListener('change', applyCurrentCardFormat);
     orientationSelect?.addEventListener('change', applyCurrentCardFormat);

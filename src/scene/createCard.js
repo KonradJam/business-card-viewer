@@ -64,35 +64,39 @@ export const createCard = () => {
 
     const updateFrontTexture = (texture) => {
         frontMaterial.color.set(0xffffff);
+        frontMaterial.map?.dispose();
         frontMaterial.map = texture;
         frontMaterial.needsUpdate = true;
     };
 
     const updateBackTexture = (texture) => {
         backMaterial.color.set(0xffffff);
+        backMaterial.map?.dispose();
         backMaterial.map = texture;
         backMaterial.needsUpdate = true;
     };
 
     const updateFrontUvTexture = (texture) => {
-        frontMaterial.roughness = FINISH_PRESETS['foil']['mat']['roughness'];
-        backMaterial.roughness = FINISH_PRESETS['foil']['mat']['roughness'];
+        updateCardFinish('mat', 'mat', 'front');
 
         frontMaterial.clearcoatMap = texture;
-        frontMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
-        frontMaterial.clearcoatRoughness = FINISH_UV_PRESETS['standard']['clearcoatRoughness'];
+        if (texture) {
+            frontMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
+            frontMaterial.clearcoatRoughness = FINISH_UV_PRESETS['standard']['clearcoatRoughness'];
+        }
 
         frontMaterial.needsUpdate = true;
         backMaterial.needsUpdate = true;
     };
 
     const updateBackUvTexture = (texture) => {
-        backMaterial.roughness = FINISH_PRESETS['foil']['mat']['roughness'];
-        frontMaterial.roughness = FINISH_PRESETS['foil']['mat']['roughness'];
+        updateCardFinish('mat', 'mat', 'back');
 
         backMaterial.clearcoatMap = texture;
-        backMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
-        backMaterial.clearcoatRoughness = FINISH_UV_PRESETS['standard']['clearcoatRoughness'];
+        if (texture) {
+            backMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
+            backMaterial.clearcoatRoughness = FINISH_UV_PRESETS['standard']['clearcoatRoughness'];
+        }
 
         frontMaterial.needsUpdate = true;
         backMaterial.needsUpdate = true;
@@ -100,18 +104,24 @@ export const createCard = () => {
 
     const FINISH_SETTINGS = ['roughness', 'clearcoat', 'clearcoatRoughness'];
 
-    const updateCardFinish = (paper, foil) => {
+    const updateCardFinish = (paper, foil, side = 'both') => {
         const finishGroup = foil === 'none' ? 'paper' : 'foil';
         const finishKey = foil === 'none' ? paper : foil;
         const preset = FINISH_PRESETS[finishGroup][finishKey];
 
-        for (const setting of FINISH_SETTINGS) {
-            frontMaterial[setting] = preset[setting];
-            backMaterial[setting] = preset[setting];
+        if (side === 'both' || side === 'front') {
+            for (const setting of FINISH_SETTINGS) {
+                frontMaterial[setting] = preset[setting];
+            }
+            frontMaterial.needsUpdate = true;
         }
 
-        frontMaterial.needsUpdate = true;
-        backMaterial.needsUpdate = true;
+        if (side === 'both' || side === 'back') {
+            for (const setting of FINISH_SETTINGS) {
+                backMaterial[setting] = preset[setting];
+            }
+            backMaterial.needsUpdate = true;
+        }
     };
 
     return { mesh, setCardFormat,
