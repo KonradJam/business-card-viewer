@@ -9,7 +9,7 @@ import { FINISH_UV_PRESETS } from '../card/finishUvPresets.js';
 import { texture } from 'three/tsl';
 
 export const createCard = () => {
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const geometry = new THREE.BoxGeometry(1, 1, 1, 400, 400);
     const textureLoader = new THREE.TextureLoader();
 
     const finishState = { paper: 'mat', foil: 'none'};
