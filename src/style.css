@@ -282,3 +282,9 @@ input[type="file"] {
 .clear-file-btn[hidden] {
     display: none !important;
 }
+
+.control-group > .btn-group > button:disabled {
+  color: #999;
+  pointer-events: none;
+}
+

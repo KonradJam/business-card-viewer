@@ -77,8 +77,9 @@ export const createCard = () => {
     };
 
     const updateFrontUvTexture = (texture) => {
-        updateCardFinish('mat', 'mat', 'front');
+        updateCardFinish('mat', 'mat', backMaterial.clearcoatMap ? 'front' : 'both');
 
+        frontMaterial.clearcoatMap?.dispose();
         frontMaterial.clearcoatMap = texture;
         if (texture) {
             frontMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
@@ -90,8 +91,9 @@ export const createCard = () => {
     };
 
     const updateBackUvTexture = (texture) => {
-        updateCardFinish('mat', 'mat', 'back');
+        updateCardFinish('mat', 'mat', frontMaterial.clearcoatMap ? 'back' : 'both');
 
+        backMaterial.clearcoatMap?.dispose();
         backMaterial.clearcoatMap = texture;
         if (texture) {
             backMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];

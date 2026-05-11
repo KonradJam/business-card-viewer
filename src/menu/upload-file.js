@@ -11,7 +11,7 @@ export const uploadFile = () => {
             const file = currentInput.files[0];
           
             if (file) {
-                const name = currentInput.files[0]?.name;
+                const name = file?.name;
                 text.textContent = name;
                 clearBtn.hidden = false;
             } else {
