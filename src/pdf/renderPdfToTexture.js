@@ -53,6 +53,11 @@ export const renderPdfToTexture = async (
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = colorSpace;
+    texture.generateMipmaps = true; 
+
+    // texture.minFilter = THREE.LinearMipmapLinearFilter;
+    // texture.magFilter = THREE.LinearFilter;
+
     texture.needsUpdate = true;
 
     return {

@@ -22,6 +22,14 @@ export const initScene = (container) => {
     scene.add(card.mesh);
 
 
+//     const testGeom = new THREE.BoxGeometry(20, 20, 1);
+// const testMat = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+// const testCube = new THREE.Mesh(testGeom, testMat);
+// testCube.position.set(0, 0, 0.5
+// ); // Zawieszamy nad frontem wizytówki
+// testCube.castShadow = true;
+// scene.add(testCube);
+
     const { ambientLight, frontLight, frontLightSecondary, backLight, backLightSecondary } = createLights();
     scene.add( ambientLight, frontLight, frontLightSecondary, backLight, backLightSecondary );
 
@@ -47,6 +55,8 @@ export const initScene = (container) => {
     const frontUvPdfInput = document.querySelector('#front-uv-pdf-input');
     const backUvPdfInput = document.querySelector('#back-uv-pdf-input');
 
+    const frontEmbossPdfInput = document.querySelector('#front-embossing-pdf-input');
+
     const applyCurrentCardFormat = () => {
         const formatId = formatSelect?.value ?? DEFAULT_CARD_FORMAT_ID;
         const orientation = orientationSelect?.value ?? DEFAULT_CARD_ORIENTATION;
@@ -63,6 +73,7 @@ export const initScene = (container) => {
         else if (side === 'back') card.updateBackTexture(null);
         else if (side === 'frontUV') card.updateFrontUvTexture(null);
         else if (side === 'backUV') card.updateBackUvTexture(null);
+        else if (side === 'frontEmboss') card.updateFrontEmbossTexture(null);
         
         return; 
     }
@@ -75,7 +86,7 @@ export const initScene = (container) => {
         } else if (side === 'back') {
             card.updateBackTexture(texture);
         }
-    } else {
+    } else if (side === 'frontUV' || side === 'backUV') {
         const { texture } = await renderPdfToTexture(file, {
             colorSpace: THREE.NoColorSpace,
             invert: true
@@ -86,6 +97,17 @@ export const initScene = (container) => {
         } else if (side === 'backUV') {
             card.updateBackUvTexture(texture);
         }
+    } else {
+        const { texture } = await renderPdfToTexture(file, { 
+            colorSpace: THREE.NoColorSpace,
+            invert: true
+        });
+        
+        if (side === 'frontEmboss') {
+            card.updateFrontEmbossTexture(texture);
+        } else if (side === 'backEmboss') {
+
+        }
     }
 };
 
@@ -95,7 +117,7 @@ export const initScene = (container) => {
     const paperSelect = document.querySelectorAll('[data-paper]');
     const foilSelect = document.querySelectorAll('[data-foil]');
 
-    const setFinishForUv = () => {
+    const setFinishBtnForUv = () => {
         paperSelect.forEach((btn) => {
             btn.classList.remove('is-active');
             if (btn.dataset.paper === 'mat') {
@@ -124,13 +146,18 @@ export const initScene = (container) => {
     frontUvPdfInput?.addEventListener('change', async (event) => {
         const file = event.target.files?.[0];
         await handlePdfUpload(file, 'frontUV');
-        setFinishForUv();
+        setFinishBtnForUv();
     });
 
     backUvPdfInput?.addEventListener('change', async (event) => {
         const file = event.target.files?.[0];
         await handlePdfUpload(file, 'backUV');
-        setFinishForUv();
+        setFinishBtnForUv();
+    });
+
+    frontEmbossPdfInput?.addEventListener('change', async (event) => {
+        const file = event.target.files?.[0];
+        await handlePdfUpload(file, 'frontEmboss');
     });
 
     applyCurrentCardFormat();

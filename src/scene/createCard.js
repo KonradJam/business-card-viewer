@@ -9,7 +9,7 @@ import { FINISH_UV_PRESETS } from '../card/finishUvPresets.js';
 import { texture } from 'three/tsl';
 
 export const createCard = () => {
-    const geometry = new THREE.BoxGeometry(1, 1, 1, 400, 400);
+    const geometry = new THREE.BoxGeometry(1, 1, 1, 400, 400, 1);
     const textureLoader = new THREE.TextureLoader();
 
     const finishState = { paper: 'mat', foil: 'none'};
@@ -28,6 +28,9 @@ export const createCard = () => {
         metalness: 0.0,
         clearcoat: 0.0,
         clearcoatRoughness: 0.0,
+
+        displacementMap: null,
+        bumpMap: null
     });
 
     const backMaterial = new THREE.MeshPhysicalMaterial({
@@ -50,7 +53,7 @@ export const createCard = () => {
     const mesh = new THREE.Mesh(geometry, materials);
 
     mesh.castShadow = true;
-    mesh.receiveShadow = false;
+    mesh.receiveShadow = true;
 
     const setCardFormat = ({ formatId, orientation }) => {
         const { widthMm, heightMm, depthMm } = getCardDimensions(formatId, orientation);
@@ -104,6 +107,49 @@ export const createCard = () => {
         backMaterial.needsUpdate = true;
     };
 
+    const updateFrontEmbossTexture = (texture) => {
+        frontMaterial.displacementMap?.dispose();
+        frontMaterial.displacementMap = texture;
+        frontMaterial.displacementScale = 1;
+        frontMaterial.displacementBias = -0.5;
+
+        frontMaterial.bumpMap?.dispose();
+        frontMaterial.bumpMap = texture;
+        frontMaterial.bumpScale = 0.4;
+
+        frontMaterial.needsUpdate = true;
+
+        let mirrorTexture = null;
+        if (texture) {
+            mirrorTexture = texture.clone();
+            mirrorTexture.wrapS = THREE.RepeatWrapping;
+            mirrorTexture.repeat.x = -1;
+            mirrorTexture.offset.x = 1;
+            mirrorTexture.needsUpdate = true;
+        }
+
+        backMaterial.displacementMap?.dispose();
+        backMaterial.displacementMap = mirrorTexture;
+        backMaterial.displacementScale = -1;
+        backMaterial.displacementBias = 0.5;
+
+        backMaterial.bumpMap = mirrorTexture;
+        backMaterial.bumpScale = -0.4;
+
+        backMaterial.needsUpdate = true;
+
+
+        mesh.customDepthMaterial = new THREE.MeshDepthMaterial({
+            depthPacking: THREE.RGBADepthPacking,
+            displacementMap: mirrorTexture,
+            displacementScale: frontMaterial.displacementScale,
+            displacementBias: frontMaterial.displacementBias
+        });
+
+        mesh.customDepthMaterial.needsUpdate = true;
+
+    };
+
     const FINISH_SETTINGS = ['roughness', 'clearcoat', 'clearcoatRoughness'];
 
     const updateCardFinish = (paper, foil, side = 'both') => {
@@ -129,5 +175,6 @@ export const createCard = () => {
     return { mesh, setCardFormat,
         updateFrontTexture, updateBackTexture,
         updateFrontUvTexture, updateBackUvTexture,
+        updateFrontEmbossTexture,
         updateCardFinish, finishState };
 };

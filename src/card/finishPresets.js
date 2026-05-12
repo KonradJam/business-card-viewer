@@ -1,14 +1,14 @@
 export const FINISH_PRESETS = {
     paper: {
         mat: {
-            roughness: 0.68,
+            roughness: 0.7,
             clearcoat: 0.0,
             clearcoatRoughness: 0.0,
         },
         glossy: {
-            roughness: 0.40,
-            clearcoat: 0.05,
-            clearcoatRoughness: 0.5,
+            roughness: 0.55,
+            clearcoat: 0.00,
+            clearcoatRoughness: 0.0,
         },
     },
     foil: {
@@ -18,8 +18,8 @@ export const FINISH_PRESETS = {
             clearcoatRoughness: 0.0,
         },
         glossy: {
-            roughness: 0.33,
-            clearcoat: 0.06,
+            roughness: 0.5,
+            clearcoat: 0.05,
             clearcoatRoughness: 0.5,
         },
     },

@@ -14,4 +14,4 @@ export const CARD_ORIENTATION = [
 export const DEFAULT_CARD_FORMAT_ID = '90x50';
 export const DEFAULT_CARD_ORIENTATION = 'landscape';
 
-export const CARD_THICKNESS_MM = 0.1;
+export const CARD_THICKNESS_MM = 0.3;
