@@ -56,6 +56,7 @@ export const initScene = (container) => {
     const backUvPdfInput = document.querySelector('#back-uv-pdf-input');
 
     const frontEmbossPdfInput = document.querySelector('#front-embossing-pdf-input');
+    const frontEmbossPdfInputSwitch = document.querySelector('#toggle-input-embossing-front');
 
     const applyCurrentCardFormat = () => {
         const formatId = formatSelect?.value ?? DEFAULT_CARD_FORMAT_ID;
@@ -158,6 +159,10 @@ export const initScene = (container) => {
     frontEmbossPdfInput?.addEventListener('change', async (event) => {
         const file = event.target.files?.[0];
         await handlePdfUpload(file, 'frontEmboss');
+    });
+
+    frontEmbossPdfInputSwitch.addEventListener('change', () => {
+        card.updateFrontEmbossTextureSwitch();
     });
 
     applyCurrentCardFormat();

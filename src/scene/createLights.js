@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 export const createLights = () => {
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, .9);
 
     const frontLight = new THREE.DirectionalLight(0xffffff, 2.3);
     frontLight.position.set(120, 10, 60);

@@ -28,9 +28,6 @@ export const createCard = () => {
         metalness: 0.0,
         clearcoat: 0.0,
         clearcoatRoughness: 0.0,
-
-        displacementMap: null,
-        bumpMap: null
     });
 
     const backMaterial = new THREE.MeshPhysicalMaterial({
@@ -108,14 +105,17 @@ export const createCard = () => {
     };
 
     const updateFrontEmbossTexture = (texture) => {
+        texture.magFilter = THREE.LinearFilter;
+        texture.minFilter = THREE.LinearMipMapLinearFilter;
+
         frontMaterial.displacementMap?.dispose();
         frontMaterial.displacementMap = texture;
-        frontMaterial.displacementScale = 1;
-        frontMaterial.displacementBias = -0.5;
+        frontMaterial.displacementScale = -1;
+        frontMaterial.displacementBias = 0.5;
 
         frontMaterial.bumpMap?.dispose();
         frontMaterial.bumpMap = texture;
-        frontMaterial.bumpScale = 0.4;
+        frontMaterial.bumpScale = -0.6;
 
         frontMaterial.needsUpdate = true;
 
@@ -130,11 +130,11 @@ export const createCard = () => {
 
         backMaterial.displacementMap?.dispose();
         backMaterial.displacementMap = mirrorTexture;
-        backMaterial.displacementScale = -1;
-        backMaterial.displacementBias = 0.5;
+        backMaterial.displacementScale = 1;
+        backMaterial.displacementBias = -0.5;
 
         backMaterial.bumpMap = mirrorTexture;
-        backMaterial.bumpScale = -0.4;
+        backMaterial.bumpScale = 0.6;
 
         backMaterial.needsUpdate = true;
 
@@ -148,6 +148,16 @@ export const createCard = () => {
 
         mesh.customDepthMaterial.needsUpdate = true;
 
+    };
+
+    const updateFrontEmbossTextureSwitch = () => {
+        for (const material of [frontMaterial, backMaterial, mesh.customDepthMaterial]) {
+            material.displacementMap *= -1;
+            material.displacementBias *= -1;
+            material.bumpScale *= -1;
+
+            material.needsUpdate = true;
+        }
     };
 
     const FINISH_SETTINGS = ['roughness', 'clearcoat', 'clearcoatRoughness'];
@@ -175,6 +185,6 @@ export const createCard = () => {
     return { mesh, setCardFormat,
         updateFrontTexture, updateBackTexture,
         updateFrontUvTexture, updateBackUvTexture,
-        updateFrontEmbossTexture,
+        updateFrontEmbossTexture, updateFrontEmbossTextureSwitch,
         updateCardFinish, finishState };
 };

@@ -126,7 +126,13 @@ export const createApp = () => {
                     <hr class="divider">
 
                     <details class="control-group">
-                        <summary class="control-legend">Front embossing PDF</summary>
+                        <summary class="control-legend">Front emboss PDF</summary>
+                        <label class="toggle-wrapper">
+                            <span class="toggle-label">Debossing</span>
+                            <input id="toggle-input-embossing-front" type="checkbox" role="switch" class="toggle-input">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Embossing</span>
+                        </label>
                         <div class="control-select control-upload">
                             <label for="front-embossing-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
@@ -141,7 +147,13 @@ export const createApp = () => {
                     </details>
 
                     <details class="control-group">
-                        <summary class="control-legend">Back embossing PDF</summary>
+                        <summary class="control-legend">Back emboss PDF</summary>
+                        <label class="toggle-wrapper">
+                            <span class="toggle-label">Debossing</span>
+                            <input id="" type="checkbox" role="switch" class="toggle-input">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Embossing</span>
+                        </label>
                         <div class="control-select control-upload">
                             <label for="back-embossing-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
                             <span class="upload-text">No file chosen</span>
