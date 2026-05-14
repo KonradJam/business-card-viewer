@@ -62,8 +62,7 @@ export const initScene = (container) => {
     const handlePdfUpload = async (file, side) => {
     if (!file) {
         if (side === 'front' || side === 'back') card.updateTexture(null, side);
-        else if (side === 'frontUV') card.updateFrontUvTexture(null);
-        else if (side === 'backUV') card.updateBackUvTexture(null);
+        else if (side === 'frontUV' || side === 'backUV') card.updateUvTexture(null, side);
         else if (side === 'frontEmboss') card.updateFrontEmbossTexture(null);
         
         return; 
@@ -78,12 +77,8 @@ export const initScene = (container) => {
             colorSpace: THREE.NoColorSpace,
             invert: true
         });
-
-        if (side === 'frontUV') {
-            card.updateFrontUvTexture(texture);
-        } else if (side === 'backUV') {
-            card.updateBackUvTexture(texture);
-        }
+        card.updateUvTexture(texture, side);
+        
     } else {
         const { texture } = await renderPdfToTexture(file, { 
             colorSpace: THREE.NoColorSpace,

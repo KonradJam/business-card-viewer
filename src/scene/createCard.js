@@ -61,33 +61,24 @@ export const createCard = () => {
         material.needsUpdate = true;
     }
 
-    const updateFrontUvTexture = (texture) => {
-        updateCardFinish('mat', 'mat', backMaterial.clearcoatMap ? 'front' : 'both');
+    const updateUvTexture = (texture, side) => {
+        if (!frontMaterial.clearcoatMap && !backMaterial.clearcoatMap ) updateCardFinish('mat', 'mat');
+        
+        const material = side === 'frontUV' ? frontMaterial : backMaterial;
+        
+        material.clearcoatMap?.dispose();
+        material.clearcoatMap = texture;
+        
+        material.clearcoat = texture ? FINISH_UV_PRESETS['standard']['clearcoat'] : 0;
+        material.clearcoatRoughness = texture ? FINISH_UV_PRESETS['standard']['clearcoatRoughness'] : 0;
 
-        frontMaterial.clearcoatMap?.dispose();
-        frontMaterial.clearcoatMap = texture;
-        if (texture) {
-            frontMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
-            frontMaterial.clearcoatRoughness = FINISH_UV_PRESETS['standard']['clearcoatRoughness'];
-        }
-
-        frontMaterial.needsUpdate = true;
-        backMaterial.needsUpdate = true;
-    };
-
-    const updateBackUvTexture = (texture) => {
-        updateCardFinish('mat', 'mat', frontMaterial.clearcoatMap ? 'back' : 'both');
-
-        backMaterial.clearcoatMap?.dispose();
-        backMaterial.clearcoatMap = texture;
-        if (texture) {
-            backMaterial.clearcoat = FINISH_UV_PRESETS['standard']['clearcoat'];
-            backMaterial.clearcoatRoughness = FINISH_UV_PRESETS['standard']['clearcoatRoughness'];
-        }
+        console.log(material.clearcoat,  material.clearcoatRoughness)
 
         frontMaterial.needsUpdate = true;
         backMaterial.needsUpdate = true;
     };
+
+    let embossState = 1;
 
     const updateFrontEmbossTexture = (texture) => {
         if (texture) {
@@ -109,12 +100,12 @@ export const createCard = () => {
         for (const [i, [materialObject, modifier]] of materials.entries()) {
             materialObject.displacementMap?.dispose();
             materialObject.displacementMap = i === 0 ? texture : mirrorTexture;
-            materialObject.displacementScale = -1 * modifier;
-            materialObject.displacementBias = 0.5 * modifier;
+            materialObject.displacementScale = -1 * modifier * embossState;
+            materialObject.displacementBias = 0.5 * modifier * embossState;
 
             materialObject.bumpMap?.dispose();
             materialObject.bumpMap = texture;
-            materialObject.bumpScale = -0.6 * modifier;
+            materialObject.bumpScale = -0.6 * modifier * embossState;
 
             materialObject.needsUpdate = true;
         }
@@ -128,6 +119,7 @@ export const createCard = () => {
 
             material.needsUpdate = true;
         }
+        embossState *= -1;
     };
 
     const FINISH_SETTINGS = ['roughness', 'clearcoat', 'clearcoatRoughness'];
@@ -154,7 +146,7 @@ export const createCard = () => {
 
     return { mesh, setCardFormat,
         updateTexture,
-        updateFrontUvTexture, updateBackUvTexture,
+        updateUvTexture,
         updateFrontEmbossTexture, updateFrontEmbossTextureSwitch,
         updateCardFinish, finishState };
 };
