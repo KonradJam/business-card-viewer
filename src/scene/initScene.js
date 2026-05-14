@@ -21,15 +21,6 @@ export const initScene = (container) => {
     const card = createCard();
     scene.add(card.mesh);
 
-
-//     const testGeom = new THREE.BoxGeometry(20, 20, 1);
-// const testMat = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-// const testCube = new THREE.Mesh(testGeom, testMat);
-// testCube.position.set(0, 0, 0.5
-// ); // Zawieszamy nad frontem wizytówki
-// testCube.castShadow = true;
-// scene.add(testCube);
-
     const { ambientLight, frontLight, frontLightSecondary, backLight, backLightSecondary } = createLights();
     scene.add( ambientLight, frontLight, frontLightSecondary, backLight, backLightSecondary );
 
@@ -70,8 +61,7 @@ export const initScene = (container) => {
 
     const handlePdfUpload = async (file, side) => {
     if (!file) {
-        if (side === 'front') card.updateFrontTexture(null);
-        else if (side === 'back') card.updateBackTexture(null);
+        if (side === 'front' || side === 'back') card.updateTexture(null, side);
         else if (side === 'frontUV') card.updateFrontUvTexture(null);
         else if (side === 'backUV') card.updateBackUvTexture(null);
         else if (side === 'frontEmboss') card.updateFrontEmbossTexture(null);
@@ -81,12 +71,8 @@ export const initScene = (container) => {
 
     if (side === 'front' || side === 'back') {
         const { texture } = await renderPdfToTexture(file, {});
-        
-        if (side === 'front') {
-            card.updateFrontTexture(texture);
-        } else if (side === 'back') {
-            card.updateBackTexture(texture);
-        }
+        card.updateTexture(texture, side);
+
     } else if (side === 'frontUV' || side === 'backUV') {
         const { texture } = await renderPdfToTexture(file, {
             colorSpace: THREE.NoColorSpace,
