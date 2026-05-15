@@ -22,52 +22,52 @@ export const createApp = () => {
     }).join("");
 
     app.innerHTML = `
-        <div class="app-shell">
+        <div class="app">
             <header class="top-bar">
-                <h1 class="app-title">Business Card Viewew</h1>
+                <h1 class="top-bar__title">Business Card Viewew</h1>
             </header>
 
             <main class="workspace">
-                <div id="scene-container"></div>
+                <div id="scene-container" class="workspace__scene"></div>
 
                 <aside class="control-panel">
                     <fieldset class="control-group">
-                        <legend class="control-legend">Business card format</legend>
-                        <select id="card-format-select" class="control-select">
+                        <legend class="control-group__legend">Business card format</legend>
+                        <select id="card-format-select" class="control-group__select">
                             ${formatOptions}
                         </select>
                     </fieldset>
 
                     <fieldset class="control-group">
-                        <legend class="control-legend">Orientation</legend>
-                        <select id="card-orientation-select" class="control-select">
+                        <legend class="control-group__legend">Orientation</legend>
+                        <select id="card-orientation-select" class="control-group__select">
                             ${orientationOptions}
                         </select>
                     </fieldset>
 
-                    <p class="control-hint">
+                    <p class="control-panel__hint">
                        Changing the format updates the 3D object immediately. 
                     </p>
 
                     <hr class="divider">
 
                     <fieldset class="control-group">
-                        <legend class="control-legend">Position reset</legend>
+                        <legend class="control-group__legend">Position reset</legend>
                         <div class="btn-group">
-                            <button type="button" data-position="front">Front</button>
-                            <button type="button" data-position="back">Back</button>
+                            <button type="button" class="btn-group__btn" data-position="front">Front</button>
+                            <button type="button" class="btn-group__btn" data-position="back">Back</button>
                         </div>
                     </fieldset>
 
                     <hr class="divider">
 
                     <details class="control-group" open>
-                        <summary class="control-legend">Front PDF</summary>
-                        <div class="control-select control-upload">
-                            <label for="front-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
-                            <span class="upload-text">No file chosen</span>
-                            <input id="front-pdf-input" type="file" accept="application/pdf" />
-                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                        <summary class="control-group__legend">Front PDF</summary>
+                        <div class="file-upload">
+                            <label for="front-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
+                            <span class="file-upload__text">No file chosen</span>
+                            <input id="front-pdf-input" class="file-upload__input" type="file" accept="application/pdf" />
+                            <button type="button" class="file-upload__clear" aria-label="Remove file" hidden>
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -77,12 +77,12 @@ export const createApp = () => {
                     </details>
 
                     <details class="control-group">
-                        <summary class="control-legend">Back PDF</summary>
-                        <div class="control-select control-upload">
-                            <label for="back-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
-                            <span class="upload-text">No file chosen</span>
-                            <input id="back-pdf-input" type="file" accept="application/pdf" />
-                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                        <summary class="control-group__legend">Back PDF</summary>
+                        <div class="file-upload">
+                            <label for="back-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
+                            <span class="file-upload__text">No file chosen</span>
+                            <input id="back-pdf-input" class="file-upload__input" type="file" accept="application/pdf" />
+                            <button type="button" class="file-upload__clear" aria-label="Remove file" hidden>
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -94,12 +94,12 @@ export const createApp = () => {
                     <hr class="divider">
 
                     <details class="control-group">
-                        <summary class="control-legend">Front spot UV PDF</summary>
-                        <div class="control-select control-upload">
-                            <label for="front-uv-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
-                            <span class="upload-text">No file chosen</span>
-                            <input class="uv-pdf-input" id="front-uv-pdf-input" type="file" accept="application/pdf" />
-                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                        <summary class="control-group__legend">Front spot UV PDF</summary>
+                        <div class="file-upload">
+                            <label for="front-uv-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
+                            <span class="file-upload__text">No file chosen</span>
+                            <input class="file-upload__input" id="front-uv-pdf-input" type="file" accept="application/pdf" />
+                            <button type="button" class="file-upload__clear" aria-label="Remove file" hidden>
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -109,56 +109,35 @@ export const createApp = () => {
                     </details>
 
                     <details class="control-group">
-                        <summary class="control-legend">Back spot UV PDF</summary>
-                        <div class="control-select control-upload">
-                            <label for="back-uv-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
-                            <span class="upload-text">No file chosen</span>
-                            <input class="uv-pdf-input" id="back-uv-pdf-input" type="file" accept="application/pdf" />
-                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                        <summary class="control-group__legend">Back spot UV PDF</summary>
+                        <div class="file-upload">
+                            <label for="back-uv-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
+                            <span class="file-upload__text">No file chosen</span>
+                            <input class="file-upload__input" id="back-uv-pdf-input" type="file" accept="application/pdf" />
+                            <button type="button" class="file-upload__clear" aria-label="Remove file" hidden>
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
                                 </svg>
                             </button>
-                        <div>
+                        </div>
                     </details>
 
                     <hr class="divider">
 
                     <details class="control-group">
-                        <summary class="control-legend">Front emboss PDF</summary>
-                        <label class="toggle-wrapper">
-                            <span class="toggle-label">Debossing</span>
-                            <input id="toggle-input-embossing-front" type="checkbox" role="switch" class="toggle-input">
-                            <span class="toggle-slider"></span>
-                            <span class="toggle-label">Embossing</span>
+                        <summary class="control-group__legend">Front emboss PDF</summary>
+                        <label class="toggle">
+                            <span class="toggle__label">Debossing</span>
+                            <input id="toggle-input-embossing-front" type="checkbox" role="switch" class="toggle__input">
+                            <span class="toggle__slider"></span>
+                            <span class="toggle__label">Embossing</span>
                         </label>
-                        <div class="control-select control-upload">
-                            <label for="front-embossing-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
-                            <span class="upload-text">No file chosen</span>
-                            <input class="embossing-pdf-input" id="front-embossing-pdf-input" type="file" accept="application/pdf" />
-                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
-                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </details>
-
-                    <details class="control-group">
-                        <summary class="control-legend">Back emboss PDF</summary>
-                        <label class="toggle-wrapper">
-                            <span class="toggle-label">Debossing</span>
-                            <input id="" type="checkbox" role="switch" class="toggle-input">
-                            <span class="toggle-slider"></span>
-                            <span class="toggle-label">Embossing</span>
-                        </label>
-                        <div class="control-select control-upload">
-                            <label for="back-embossing-pdf-input" class="upload-btn" aria-label="Choose file">Choose File</label>
-                            <span class="upload-text">No file chosen</span>
-                            <input class="embossing-pdf-input" id="back-embossing-pdf-input" type="file" accept="application/pdf" />
-                            <button type="button" class="clear-file-btn" aria-label="Remove file" hidden>
+                        <div class="file-upload">
+                            <label for="front-embossing-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
+                            <span class="file-upload__text">No file chosen</span>
+                            <input class="file-upload__input" id="front-embossing-pdf-input" type="file" accept="application/pdf" />
+                            <button type="button" class="file-upload__clear" aria-label="Remove file" hidden>
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -170,19 +149,19 @@ export const createApp = () => {
                     <hr class="divider">
 
                     <fieldset class="control-group" data-control="paper">
-                        <summary class="control-legend">Paper</summary>
+                        <legend class="control-group__legend">Paper</legend>
                         <div class="btn-group">
-                            <button type="button" data-paper="mat" class="is-active">Mat</button>
-                            <button type="button" data-paper="glossy">Glossy</button>
+                            <button type="button" class="btn-group__btn btn-group__btn--active" data-paper="mat">Mat</button>
+                            <button type="button" class="btn-group__btn" data-paper="glossy">Glossy</button>
                         </div>
                     </fieldset>
 
                     <fieldset class="control-group" data-control="foil">
-                        <legend class="control-legend">Foil</legend>
+                        <legend class="control-group__legend">Foil</legend>
                         <div class="btn-group">
-                            <button type="button" data-foil="none" class="is-active">None</button>
-                            <button type="button" data-foil="mat">Mat</button>
-                            <button type="button" data-foil="glossy">Glossy</button>
+                            <button type="button" class="btn-group__btn btn-group__btn--active" data-foil="none">None</button>
+                            <button type="button" class="btn-group__btn" data-foil="mat">Mat</button>
+                            <button type="button" class="btn-group__btn" data-foil="glossy">Glossy</button>
                         </div>
                     </fieldset>
                 </aside>

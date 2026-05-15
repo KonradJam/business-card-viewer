@@ -1,5 +1,5 @@
 export const disableButtons = () => {
-    const uvInput = document.querySelectorAll('.uv-pdf-input');
+    const uvInput = document.querySelectorAll('input[id*="uv"]');
     const paperFoilBtns = document.querySelectorAll('button[data-paper], button[data-foil]');
     const uvFilesUploaded = [false, false];
 

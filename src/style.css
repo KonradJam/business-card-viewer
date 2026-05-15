@@ -26,7 +26,7 @@ body {
   color: #1a1a1a;
 }
 
-.app-shell {
+.app {
   display: grid;
   grid-template-rows: 64px minmax(0, 1fr);
   height: 100vh;
@@ -43,7 +43,7 @@ body {
   z-index: 10;
 }
 
-.app-title {
+.top-bar__title {
   margin: 0;
   font-size: 0.95rem;
   font-weight: 600;
@@ -58,7 +58,8 @@ body {
   overflow: hidden;
 }
 
-#scene-container {
+#scene-container,
+.workspace__scene {
   width: 100%;
   height: 100%;
   min-width: 0;
@@ -113,7 +114,7 @@ body {
   min-width: 0;
 }
 
-.control-legend {
+.control-group__legend {
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -143,7 +144,8 @@ body {
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.32);
 }
 
-.control-select {
+.control-select,
+.control-group__select {
   width: 100%;
   padding: 0.8rem 0.9rem;
   border: 1px solid rgba(18, 18, 18, 0.1);
@@ -153,18 +155,21 @@ body {
   appearance: none;
 }
 
-.control-select:hover {
+.control-select:hover,
+.control-group__select:hover {
   border-color: rgba(18, 18, 18, 0.18);
   background: rgba(255, 255, 255, 0.58);
 }
 
-.control-select:focus {
+.control-select:focus,
+.control-group__select:focus {
   outline: none;
   border-color: rgba(18, 18, 18, 0.24);
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.32);
 }
 
-.control-hint {
+.control-hint,
+.control-panel__hint {
   margin: 0;
   font-size: 0.8rem;
   color: rgba(20, 20, 20, 0.62);
@@ -175,7 +180,8 @@ body {
   gap: .5rem;
 }
 
-.control-group > .btn-group > button {
+.control-group > .btn-group > button,
+.control-group > .btn-group > .btn-group__btn {
   width: 100%;
     appearance: none;
     border: 1px solid rgba(0, 0, 0, 0.12);
@@ -189,11 +195,13 @@ body {
     transition: 0.2s ease;
 }
 
-.control-group > .btn-group > button:hover {
+.control-group > .btn-group > button:hover,
+.control-group > .btn-group > .btn-group__btn:hover {
     background: #f3f3f3;
 }
 
-.control-group button.is-active {
+.control-group button.is-active,
+.btn-group__btn--active {
     background: rgba(255, 255, 255, 1);
     color: #222;
     border: 1px solid rgba(0, 0, 0, 0.12);
@@ -210,7 +218,8 @@ input[type="file"] {
   border: 0;
 }
 
-.control-upload {
+.control-upload,
+.file-upload {
   display: flex;
   align-items: center;
   height: 2.7rem;
@@ -219,7 +228,8 @@ input[type="file"] {
   min-width: 0;
 }
 
-.upload-btn {
+.upload-btn,
+.file-upload__btn {
   display: block;
   height: 100%;
   font-size: 0.8rem;
@@ -234,11 +244,13 @@ input[type="file"] {
   white-space: nowrap;
 }
 
-.upload-btn:hover {
+.upload-btn:hover,
+.file-upload__btn:hover {
   background: #f3f3f3;
 }
 
-.upload-text {
+.upload-text,
+.file-upload__text {
   display: block;
   flex: 1;
   min-width: 0;
@@ -258,7 +270,8 @@ input[type="file"] {
   margin: 0;
 }
 
-.clear-file-btn {
+.clear-file-btn,
+.file-upload__clear {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,13 +286,16 @@ input[type="file"] {
   transition: background-color 0.2s, color 0.2s;
 }
 
-.clear-file-btn:hover {
+.clear-file-btn:hover,
+.file-upload__clear:hover {
     background-color: #ef4444;
     color: white;
 }
 
 /* Wykorzystujemy natywny atrybut hidden z HTML */
-.clear-file-btn[hidden] {
+.clear-file-btn[hidden],
+.file-upload__clear[hidden],
+.file-upload__clear--hidden {
     display: none !important;
 }
 
@@ -288,7 +304,8 @@ input[type="file"] {
   pointer-events: none;
 }
 
-.toggle-wrapper {
+.toggle-wrapper,
+.toggle {
   display: flex;
   align-items: center;
   gap: .75rem;
@@ -296,19 +313,22 @@ input[type="file"] {
   margin-bottom: 0.5rem;
 }
 
-.toggle-label {
+.toggle-label,
+.toggle__label {
   font-size: 0.8rem;
   color: rgba(20, 20, 20, 0.62);
 }
 
-.toggle-input {
+.toggle-input,
+.toggle__input {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.toggle-slider {
+.toggle-slider,
+.toggle__slider {
   position: relative;
   width: 3rem;
   height: 1.5rem;
@@ -317,7 +337,8 @@ input[type="file"] {
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.toggle-slider::before {
+.toggle-slider::before,
+.toggle__slider::before {
   content: "";
   position: absolute;
   top: .125rem;
@@ -329,14 +350,17 @@ input[type="file"] {
   transition: transform 0.3s ease;
 }
 
-.toggle-label:has(+ .toggle-input:not(:checked)) {
+.toggle-label:has(+ .toggle-input:not(:checked)),
+.toggle__label:has(+ .toggle__input:not(:checked)) {
   color: black;
 }
 
-.toggle-input:checked ~ .toggle-label {
+.toggle-input:checked ~ .toggle-label,
+.toggle__input:checked ~ .toggle__label {
   color: black;
 }
 
-.toggle-input:checked + .toggle-slider::before {
+.toggle-input:checked + .toggle-slider::before,
+.toggle__input:checked + .toggle__slider::before {
   transform: translateX(1.5rem);
 }

@@ -2,9 +2,9 @@ export const uploadFile = () => {
     const inputFile = document.querySelectorAll('input[type="file"]');
     
     inputFile.forEach((input) => {
-        const wrapper = input.closest('.control-upload');
-        const clearBtn = wrapper.querySelector('.clear-file-btn');
-        const text = wrapper.querySelector('.upload-text');
+        const wrapper = input.closest('.file-upload');
+        const clearBtn = wrapper.querySelector('.file-upload__clear');
+        const text = wrapper.querySelector('.file-upload__text');
         
         input.addEventListener('change', (e) => {
             const currentInput = e.target;
