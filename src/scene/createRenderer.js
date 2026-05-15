@@ -9,9 +9,6 @@ export const createRenderer = (container) => {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
 
-    // renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    // renderer.toneMappingExposure = 1.0;
-
     container.appendChild(renderer.domElement);
 
     return renderer;

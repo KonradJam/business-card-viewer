@@ -72,8 +72,6 @@ export const createCard = () => {
         material.clearcoat = texture ? FINISH_UV_PRESETS['standard']['clearcoat'] : 0;
         material.clearcoatRoughness = texture ? FINISH_UV_PRESETS['standard']['clearcoatRoughness'] : 0;
 
-        console.log(material.clearcoat,  material.clearcoatRoughness)
-
         frontMaterial.needsUpdate = true;
         backMaterial.needsUpdate = true;
     };

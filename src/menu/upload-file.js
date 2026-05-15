@@ -1,10 +1,10 @@
 export const uploadFile = () => {
-    const inputFile = document.querySelectorAll('input[type="file"]');
+    const inputFile = document.querySelectorAll('.file-upload__input');
     
     inputFile.forEach((input) => {
-        const wrapper = input.closest('.control-upload');
-        const clearBtn = wrapper.querySelector('.clear-file-btn');
-        const text = wrapper.querySelector('.upload-text');
+        const wrapper = input.closest('.file-upload');
+        const clearBtn = wrapper.querySelector('.file-upload__clear');
+        const text = wrapper.querySelector('.file-upload__text');
         
         input.addEventListener('change', (e) => {
             const currentInput = e.target;
@@ -13,10 +13,10 @@ export const uploadFile = () => {
             if (file) {
                 const name = file?.name;
                 text.textContent = name;
-                clearBtn.hidden = false;
+                clearBtn.classList.remove('file-upload__clear--hidden');
             } else {
                 text.textContent = 'No file chosen';
-                clearBtn.hidden = true;
+                clearBtn.classList.add('file-upload__clear--hidden');
             }  
         });
 

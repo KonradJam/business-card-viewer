@@ -1,5 +1,5 @@
 export const disableButtons = () => {
-    const uvInput = document.querySelectorAll('.uv-pdf-input');
+    const uvInput = document.querySelectorAll('input[id*="uv"]');
     const paperFoilBtns = document.querySelectorAll('button[data-paper], button[data-foil]');
     const uvFilesUploaded = [false, false];
 
@@ -21,7 +21,6 @@ export const disableButtons = () => {
         paperFoilBtns.forEach((btn) => {
             if (uvFilesUploaded.some(up => up === true)) {
                 btn.disabled = true;
-                console.log('tak')
             } else {
                 btn.disabled = false;
             }
