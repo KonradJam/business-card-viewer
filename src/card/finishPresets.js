@@ -19,8 +19,8 @@ export const FINISH_PRESETS = {
         },
         glossy: {
             roughness: 0.5,
-            clearcoat: 0.05,
-            clearcoatRoughness: 0.5,
+            clearcoat: 0.08,
+            clearcoatRoughness: 0.2,
         },
     },
 };
