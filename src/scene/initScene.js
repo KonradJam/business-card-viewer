@@ -7,6 +7,7 @@ import { createCard } from "./createCard.js";
 import { createControls } from "./createControls";
 import { createLights } from "./createLights.js";
 import { setupResizerHandler } from "./setupResizeHandler";
+import { SAMPLES } from '../samples/samples.js';
 import {
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
@@ -36,6 +37,8 @@ export const initScene = (container) => {
             setCameraView(camera, controls, position);
         });
     });
+
+    const sampleSelect = document.querySelector('#sample-select');
 
     const formatSelect = document.querySelector('#card-format-select');
     const orientationSelect = document.querySelector('#card-orientation-select');
@@ -91,7 +94,7 @@ export const initScene = (container) => {
 
         }
     }
-};
+};  
 
     formatSelect?.addEventListener('change', applyCurrentCardFormat);
     orientationSelect?.addEventListener('change', applyCurrentCardFormat);
@@ -161,6 +164,36 @@ export const initScene = (container) => {
             });
         });
     };
+
+    sampleSelect.addEventListener('change', async (event) => {
+        const id = event.target.value;
+        if (id) { 
+            for (const [key, val] of Object.entries(SAMPLES[id].files)) {
+                handlePdfUpload(val, key);
+            }
+            console.log()
+
+            const frontUploadText = document.querySelector('#front-pdf-input + .file-upload__text');
+            frontUploadText.textContent = SAMPLES[id].files.front || "No file chosen";
+            frontUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
+
+            const backUploadText = document.querySelector('#back-pdf-input + .file-upload__text');
+            backUploadText.textContent = SAMPLES[id].files.back || "No file chosen";
+            backUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
+
+            const frontUvUploadText = document.querySelector('#front-uv-pdf-input + .file-upload__text');
+            frontUvUploadText.textContent = SAMPLES[id].files.frontUV || "No file chosen";
+            frontUvUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
+
+            const backUvUploadText = document.querySelector('#back-uv-pdf-input + .file-upload__text');
+            backUvUploadText.textContent = SAMPLES[id].files.backUV || "No file chosen";
+            backUvUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
+
+            const frontEmbossUploadText = document.querySelector('#front-embossing-pdf-input + .file-upload__text');
+            frontEmbossUploadText.textContent = SAMPLES[id].files.frontEmboss || "No file chosen";
+            frontEmbossUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
+        }
+    });
 
     setupToggleGroup(paperSelect, 'paper');
     setupToggleGroup(foilSelect, 'foil');

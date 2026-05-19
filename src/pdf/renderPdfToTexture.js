@@ -5,18 +5,31 @@ import * as THREE from 'three';
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 export const renderPdfToTexture = async (
-    file, {
+    source, {
         targetWidth = 1600,
         colorSpace = THREE.SRGBColorSpace,
         invert = false
     }
 ) => {
-    const buffer = await file.arrayBuffer();
+    let buffer;
 
+    if (typeof source === 'string') {
+        const response = await fetch(source);
+
+        if (!response.ok) {
+            throw new Error(`Error downloading the PDF from ${source}: ${response.status}`);
+        }
+
+        buffer = await response.arrayBuffer();
+    } else {
+        buffer = await source.arrayBuffer();
+    }
+
+    
     const loadingTask = pdfjsLib.getDocument({ data: buffer });
     const pdf = await loadingTask.promise;
     const page = await pdf.getPage(1);
-
+    
     const baseViewport = page.getViewport({ scale: 1 });
     const scale = targetWidth / baseViewport.width;
     const viewport = page.getViewport({ scale });

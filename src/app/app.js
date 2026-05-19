@@ -1,4 +1,5 @@
 import { createSceneContainer } from '../scene/sceneContainer.js';
+import { SAMPLES } from '../samples/samples.js';
 import {
     CARD_FORMATS,
     CARD_ORIENTATION,
@@ -9,6 +10,14 @@ import { menu } from '../menu/menu.js';
 
 export const createApp = () => {
     const app = document.querySelector('#app');
+
+    const samplesOptions = SAMPLES.map((sample) => {
+        return `<option value="${sample.id}">${sample.label} |
+            ${sample.tags.map((tag) => {
+                return tag[1] === false ? `-${tag[0]}` : `+${tag[1]}`;
+            })}
+        </option>`;
+    }).join("");
 
     const formatOptions = CARD_FORMATS.map((format) => {
         return `<option value="${format.id}" ${format.id === DEFAULT_CARD_FORMAT_ID ? "selected" : ""}>
@@ -28,10 +37,28 @@ export const createApp = () => {
 
             <main class="workspace">
                 <div id="scene-container" class="workspace__scene"></div>
+                <aside class="control-panel">
+
+                <!-- ##### SAMPLE section START ##### -->
+
+                    <fieldset class="control-group">
+                        <legend class="control-group__legend">Samples</legend>
+                        <select id="sample-select" class="control-group__select">
+                            <option value="">Try a prepared example</option>
+                            ${samplesOptions}
+                        </select>
+                    </fieldset>
+
+                    <p class="control-panel__hint">
+                       or upload your own files 
+                    </p>
+
+                <!-- ##### SAMPLE section STOP ##### -->
+
+                <hr class="divider">
 
                 <!-- ##### CARD section START ##### -->
 
-                <aside class="control-panel">
                     <fieldset class="control-group">
                         <legend class="control-group__legend">Business card format</legend>
                         <select id="card-format-select" class="control-group__select">
@@ -74,8 +101,8 @@ export const createApp = () => {
                         <summary class="control-group__legend">Front PDF</summary>
                         <div class="file-upload">
                             <label for="front-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
-                            <span class="file-upload__text">No file chosen</span>
                             <input id="front-pdf-input" class="file-upload__input" type="file" accept="application/pdf" />
+                            <span class="file-upload__text">No file chosen</span>
                             <button type="button" class="file-upload__clear file-upload__clear--hidden" aria-label="Remove file">
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -89,8 +116,8 @@ export const createApp = () => {
                         <summary class="control-group__legend">Back PDF</summary>
                         <div class="file-upload">
                             <label for="back-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
-                            <span class="file-upload__text">No file chosen</span>
                             <input id="back-pdf-input" class="file-upload__input" type="file" accept="application/pdf" />
+                            <span class="file-upload__text">No file chosen</span>
                             <button type="button" class="file-upload__clear file-upload__clear--hidden" aria-label="Remove file">
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -110,8 +137,8 @@ export const createApp = () => {
                         <summary class="control-group__legend">Front spot UV PDF</summary>
                         <div class="file-upload">
                             <label for="front-uv-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
-                            <span class="file-upload__text">No file chosen</span>
                             <input class="file-upload__input" id="front-uv-pdf-input" type="file" accept="application/pdf" />
+                            <span class="file-upload__text">No file chosen</span>
                             <button type="button" class="file-upload__clear file-upload__clear--hidden" aria-label="Remove file">
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -125,8 +152,8 @@ export const createApp = () => {
                         <summary class="control-group__legend">Back spot UV PDF</summary>
                         <div class="file-upload">
                             <label for="back-uv-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
-                            <span class="file-upload__text">No file chosen</span>
                             <input class="file-upload__input" id="back-uv-pdf-input" type="file" accept="application/pdf" />
+                            <span class="file-upload__text">No file chosen</span>
                             <button type="button" class="file-upload__clear file-upload__clear--hidden" aria-label="Remove file">
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -152,8 +179,8 @@ export const createApp = () => {
                         </label>
                         <div class="file-upload">
                             <label for="front-embossing-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
-                            <span class="file-upload__text">No file chosen</span>
                             <input class="file-upload__input" id="front-embossing-pdf-input" type="file" accept="application/pdf" />
+                            <span class="file-upload__text">No file chosen</span>
                             <button type="button" class="file-upload__clear file-upload__clear--hidden" aria-label="Remove file">
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
