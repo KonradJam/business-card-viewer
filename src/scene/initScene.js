@@ -9,6 +9,7 @@ import { createLights } from "./createLights.js";
 import { setupResizerHandler } from "./setupResizeHandler";
 import { SAMPLES } from '../samples/samples.js';
 import { uploadSample } from '../menu/uploadSample.js';
+import { disable } from '../menu/disableButtons.js';
 import {
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
@@ -103,16 +104,16 @@ export const initScene = (container) => {
     const paperSelect = document.querySelectorAll('[data-paper]');
     const foilSelect = document.querySelectorAll('[data-foil]');
 
-    const setFinishBtnForUv = () => {
+    const setFinishBtn = (paper, foil) => {
         paperSelect.forEach((btn) => {
             btn.classList.remove('btn-group__btn--active');
-            if (btn.dataset.paper === 'mat') {
+            if (btn.dataset.paper === paper) {
                 btn.classList.add('btn-group__btn--active');
             }
         });
         foilSelect.forEach((btn) => {
             btn.classList.remove('btn-group__btn--active');
-            if (btn.dataset.foil === 'mat') {
+            if (btn.dataset.foil === foil) {
                 btn.classList.add('btn-group__btn--active');
             }
         });
@@ -132,13 +133,13 @@ export const initScene = (container) => {
     frontUvPdfInput?.addEventListener('change', async (event) => {
         const file = event.target.files?.[0];
         await handlePdfUpload(file, 'frontUV');
-        setFinishBtnForUv();
+        setFinishBtn('mat', 'mat');
     });
 
     backUvPdfInput?.addEventListener('change', async (event) => {
         const file = event.target.files?.[0];
         await handlePdfUpload(file, 'backUV');
-        setFinishBtnForUv();
+        setFinishBtn('mat', 'mat');
     });
 
     frontEmbossPdfInput?.addEventListener('change', async (event) => {
@@ -167,13 +168,19 @@ export const initScene = (container) => {
     };
 
     sampleSelect.addEventListener('change', async (event) => {
-        const id = event.target.value;
-        if (id) { 
-            for (const [key, val] of Object.entries(SAMPLES[id].files)) {
+        const index = event.target.value;
+
+        if (index) { 
+            for (const [key, val] of Object.entries(SAMPLES[index].files)) {
                 handlePdfUpload(val, key);
-                console.log(val, key);
-                if (val) uploadSample(val, key);
+                uploadSample(val, key);
             }
+            const paper = SAMPLES[index].tags.paper;
+            const foil = SAMPLES[index].tags.foil;
+
+            card.updateCardFinish(paper, foil || 'none');
+            setFinishBtn(paper, foil || 'none');
+            disable();
         }
     });
 

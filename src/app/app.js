@@ -13,7 +13,7 @@ export const createApp = () => {
 
     const samplesOptions = SAMPLES.map((sample) => {
         return `<option value="${sample.id}">${sample.label} |
-            ${sample.tags.map((tag) => {
+            ${Object.entries(sample.tags).map((tag) => {
                 return tag[1] === false ? `-${tag[0]}` : `+${tag[1]}`;
             })}
         </option>`;

@@ -1,29 +1,24 @@
-export const disableButtons = () => {
-    const uvInput = document.querySelectorAll('input[id*="uv"]');
-    const paperFoilBtns = document.querySelectorAll('button[data-paper], button[data-foil]');
-    const uvFilesUploaded = [false, false];
+import { uploadUvState } from "./uploadUvState";
 
+export const disableButtons = () => {
+    const uvInput = document.querySelectorAll('input[id*="UV"]');
+    
     uvInput.forEach((input) => {
         input.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-
-            if (input.id.includes('front-uv')) {
-                uvFilesUploaded[0] = file ? true : false;
-                disable();
-            } else {
-                uvFilesUploaded[1] = file ? true : false;
-                disable();
-            }
+            disable();
         });
     });
 
-    const disable = () => {
-        paperFoilBtns.forEach((btn) => {
-            if (uvFilesUploaded.some(up => up === true)) {
-                btn.disabled = true;
-            } else {
-                btn.disabled = false;
-            }
-         });
-    };
+};
+
+export const disable = () => {
+    const paperFoilBtns = document.querySelectorAll('button[data-paper], button[data-foil]');
+
+    paperFoilBtns.forEach((btn) => {
+        if (uploadUvState.frontUV || uploadUvState.backUV) {
+            btn.disabled = true;
+        } else {
+            btn.disabled = false;
+        }
+     });
 };
