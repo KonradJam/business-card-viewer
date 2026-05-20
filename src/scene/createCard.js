@@ -7,7 +7,6 @@ import {
 import { FINISH_PRESETS } from '../card/finishPresets.js';
 import { FINISH_UV_PRESETS } from '../card/finishUvPresets.js';
 import { texture } from 'three/tsl';
-import { BasicLightMapNode } from 'three/webgpu';
 
 export const createCard = () => {
     const geometry = new THREE.BoxGeometry(1, 1, 1, 400, 400, 1);

@@ -180,6 +180,7 @@ export const initScene = (container) => {
 
             card.updateCardFinish(paper, foil || 'none');
             setFinishBtn(paper, foil || 'none');
+
             disable();
         }
     });
