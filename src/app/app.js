@@ -136,8 +136,8 @@ export const createApp = () => {
                     <details class="control-group">
                         <summary class="control-group__legend">Front spot UV PDF</summary>
                         <div class="file-upload">
-                            <label for="front-uv-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
-                            <input class="file-upload__input" id="front-uv-pdf-input" type="file" accept="application/pdf" />
+                            <label for="frontUV-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
+                            <input class="file-upload__input" id="frontUV-pdf-input" type="file" accept="application/pdf" />
                             <span class="file-upload__text">No file chosen</span>
                             <button type="button" class="file-upload__clear file-upload__clear--hidden" aria-label="Remove file">
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -151,8 +151,8 @@ export const createApp = () => {
                     <details class="control-group">
                         <summary class="control-group__legend">Back spot UV PDF</summary>
                         <div class="file-upload">
-                            <label for="back-uv-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
-                            <input class="file-upload__input" id="back-uv-pdf-input" type="file" accept="application/pdf" />
+                            <label for="backUV-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
+                            <input class="file-upload__input" id="backUV-pdf-input" type="file" accept="application/pdf" />
                             <span class="file-upload__text">No file chosen</span>
                             <button type="button" class="file-upload__clear file-upload__clear--hidden" aria-label="Remove file">
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -173,13 +173,13 @@ export const createApp = () => {
                         <summary class="control-group__legend">Front emboss PDF</summary>
                         <label class="toggle">
                             <span class="toggle__label">Debossing</span>
-                            <input id="toggle-input-embossing-front" type="checkbox" role="switch" class="toggle__input">
+                            <input id="frontEmboss-toggle" type="checkbox" role="switch" class="toggle__input">
                             <span class="toggle__slider"></span>
                             <span class="toggle__label">Embossing</span>
                         </label>
                         <div class="file-upload">
-                            <label for="front-embossing-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
-                            <input class="file-upload__input" id="front-embossing-pdf-input" type="file" accept="application/pdf" />
+                            <label for="frontEmboss-pdf-input" class="file-upload__btn" aria-label="Choose file">Choose File</label>
+                            <input class="file-upload__input" id="frontEmboss-pdf-input" type="file" accept="application/pdf" />
                             <span class="file-upload__text">No file chosen</span>
                             <button type="button" class="file-upload__clear file-upload__clear--hidden" aria-label="Remove file">
                                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

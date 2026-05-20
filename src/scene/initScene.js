@@ -8,6 +8,7 @@ import { createControls } from "./createControls";
 import { createLights } from "./createLights.js";
 import { setupResizerHandler } from "./setupResizeHandler";
 import { SAMPLES } from '../samples/samples.js';
+import { uploadSample } from '../menu/uploadSample.js';
 import {
     DEFAULT_CARD_FORMAT_ID,
     DEFAULT_CARD_ORIENTATION
@@ -46,11 +47,11 @@ export const initScene = (container) => {
     const frontPdfInput = document.querySelector('#front-pdf-input');
     const backPdfInput = document.querySelector('#back-pdf-input');
 
-    const frontUvPdfInput = document.querySelector('#front-uv-pdf-input');
-    const backUvPdfInput = document.querySelector('#back-uv-pdf-input');
+    const frontUvPdfInput = document.querySelector('#frontUV-pdf-input');
+    const backUvPdfInput = document.querySelector('#frontUV-pdf-input');
 
-    const frontEmbossPdfInput = document.querySelector('#front-embossing-pdf-input');
-    const frontEmbossPdfInputSwitch = document.querySelector('#toggle-input-embossing-front');
+    const frontEmbossPdfInput = document.querySelector('#frontEmboss-pdf-input');
+    const frontEmbossToggle = document.querySelector('#frontEmboss-toggle');
 
     const applyCurrentCardFormat = () => {
         const formatId = formatSelect?.value ?? DEFAULT_CARD_FORMAT_ID;
@@ -145,7 +146,7 @@ export const initScene = (container) => {
         await handlePdfUpload(file, 'frontEmboss');
     });
 
-    frontEmbossPdfInputSwitch.addEventListener('change', () => {
+    frontEmbossToggle.addEventListener('change', () => {
         card.updateFrontEmbossTextureSwitch();
     });
 
@@ -170,28 +171,9 @@ export const initScene = (container) => {
         if (id) { 
             for (const [key, val] of Object.entries(SAMPLES[id].files)) {
                 handlePdfUpload(val, key);
+                console.log(val, key);
+                if (val) uploadSample(val, key);
             }
-            console.log()
-
-            const frontUploadText = document.querySelector('#front-pdf-input + .file-upload__text');
-            frontUploadText.textContent = SAMPLES[id].files.front || "No file chosen";
-            frontUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
-
-            const backUploadText = document.querySelector('#back-pdf-input + .file-upload__text');
-            backUploadText.textContent = SAMPLES[id].files.back || "No file chosen";
-            backUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
-
-            const frontUvUploadText = document.querySelector('#front-uv-pdf-input + .file-upload__text');
-            frontUvUploadText.textContent = SAMPLES[id].files.frontUV || "No file chosen";
-            frontUvUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
-
-            const backUvUploadText = document.querySelector('#back-uv-pdf-input + .file-upload__text');
-            backUvUploadText.textContent = SAMPLES[id].files.backUV || "No file chosen";
-            backUvUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
-
-            const frontEmbossUploadText = document.querySelector('#front-embossing-pdf-input + .file-upload__text');
-            frontEmbossUploadText.textContent = SAMPLES[id].files.frontEmboss || "No file chosen";
-            frontEmbossUploadText.nextElementSibling.classList.remove('file-upload__clear--hidden');
         }
     });
 

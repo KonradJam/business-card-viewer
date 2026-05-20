@@ -1,4 +1,4 @@
-import { uploadFile } from "./upload-file";
+import { uploadFile } from "./uploadFile";
 import { disableButtons } from "./disableButtons";
 
 export const menu = () => {
