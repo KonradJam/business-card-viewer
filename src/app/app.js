@@ -1,4 +1,4 @@
-import { createSceneContainer } from '../scene/sceneContainer.js';
+import { createSceneContainer } from '../scene/createSceneContainer.js';
 import { SAMPLES } from '../samples/samples.js';
 import {
     CARD_FORMATS,
@@ -220,6 +220,6 @@ export const createApp = () => {
         </div>
     `;
 
-    createSceneContainer();
-    menu();
+    const sceneObjects = createSceneContainer();
+    menu(sceneObjects);
 };

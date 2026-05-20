@@ -7,5 +7,5 @@ export const createSceneContainer = () => {
         throw new Error('Scene container was not found');
     }
 
-    initScene(container);
+    return initScene(container);
 };
