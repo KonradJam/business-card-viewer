@@ -68,9 +68,6 @@ export const renderPdfToTexture = async (
     texture.colorSpace = colorSpace;
     texture.generateMipmaps = true; 
 
-    // texture.minFilter = THREE.LinearMipmapLinearFilter;
-    // texture.magFilter = THREE.LinearFilter;
-
     texture.needsUpdate = true;
 
     return {
