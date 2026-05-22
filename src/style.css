@@ -37,11 +37,11 @@ body {
 /* ##### BODY and APP section STOP ##### */
 
 
-
 /* ##### TOP BAR section START ##### */
 .top-bar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 1.5rem;
   border-bottom: 1px solid rgba(18, 18, 18, 0.08);
   background: rgba(255, 255, 255, 0.45);
@@ -63,6 +63,8 @@ body {
 
 /* ##### WORKSPACE section START ##### */
 .workspace {
+  anchor-name: --workspace;
+
   position: relative;
   min-width: 0;
   min-height: 0;
@@ -75,6 +77,8 @@ body {
   min-width: 0;
   min-height: 0;
   overflow: hidden;
+
+  cursor: all-scroll;
 }
 
 .workspace__scene > canvas {
@@ -86,14 +90,30 @@ body {
 
 
 
+/* ##### HAMBURGER section START ##### */
+.hamburger {
+  background: transparent;
+  border: none;
+
+  font-size: 2rem;
+  font-weight: 900;
+
+  cursor: pointer;
+}
+/* ##### HAMBURGER section STOP ##### */
+
+
+
 /* ##### CONTROL PANEL section START */
-.control-panel {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+.control-panel:popover-open {
+  position-anchor: --workspace;
+
+  position: fixed;
+  top: anchor(top);
+  left: anchor(left);
   z-index: 5;
 
-  max-height: calc(100dvh - 5rem);
+  max-height: calc(100dvh - 4rem);
   overflow-y: auto;
   overscroll-behavior-y: contain;
   scrollbar-width: thin;
@@ -103,11 +123,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: min(320px, calc(100% - 2rem));
+  width: 100%;
   padding: 1rem;
-
-  border: 1px solid rgba(20, 20, 20, 0.08);
-  border-radius: 20px;
+  margin: 0;
+  border: none;
+  
   background: rgba(255, 255, 255, 0.28);
 
   backdrop-filter: blur(18px) saturate(150%);
@@ -126,6 +146,21 @@ body {
   margin: 0;
   font-size: 0.8rem;
   color: rgba(20, 20, 20, 0.62);
+}
+
+@media (min-width: 36rem) {
+  .control-panel:popover-open {
+
+    top: calc(anchor(top) + 1rem);
+    left: calc(anchor(left) + 1rem);
+
+    max-height: calc(100dvh - 5rem);
+
+    border: 1px solid rgba(20, 20, 20, 0.08);
+    border-radius: 20px;
+
+    width: min(320px, calc(100% - 2rem));
+  }
 }
 /* ##### CONTROL PANEL section STOP ##### */
 

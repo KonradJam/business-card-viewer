@@ -9,6 +9,10 @@ export const createApp = () => {
         <div class="app">
             <header class="top-bar">
                 <h1 class="top-bar__title">Business Card Viewer</h1>
+
+                <button class="hamburger" popovertarget="menu" aria-label="Open nav menu">
+                    <span aria-hidden="true">☰</span>
+                </button>
             </header>
 
             <main class="workspace">

@@ -30,7 +30,7 @@ export const sidebar = () => {
     }).join("");
 
     return /*html*/`
-        <aside class="control-panel">
+        <aside class="control-panel" id="menu" popover>
 
                 ${selectSection('sample', 'Samples', samplesOptions)}
                 ${hintSection("or upload your own files")}
