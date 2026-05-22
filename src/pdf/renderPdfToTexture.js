@@ -14,8 +14,8 @@ export const renderPdfToTexture = async (
     let buffer;
 
     if (typeof source === 'string') {
-        const response = await fetch(source);
-
+        const response = await fetch(import.meta.env.BASE_URL + source);
+        console.log(import.meta.env.BASE_URL + source)
         if (!response.ok) {
             throw new Error(`Error downloading the PDF from ${source}: ${response.status}`);
         }

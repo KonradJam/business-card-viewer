@@ -9,10 +9,10 @@ export const SAMPLES = [
             emboss: false
         },
         files: {
-            front: '/samples/1/Sample-1-front.pdf',
-            back: '/samples/1/Sample-1-back.pdf',
-            frontUV: '/samples/1/Sample-1-frontUV.pdf',
-            backUV: '/samples/1/Sample-1-backUV.pdf',
+            front: 'samples/1/Sample-1-front.pdf',
+            back: 'samples/1/Sample-1-back.pdf',
+            frontUV: 'samples/1/Sample-1-frontUV.pdf',
+            backUV: 'samples/1/Sample-1-backUV.pdf',
             frontEmboss: null
         }
     },
@@ -26,11 +26,11 @@ export const SAMPLES = [
             emboss: 'emboss'
         },        
         files: {
-            front: '/samples/2/Sample-2-front.pdf',
-            back: '/samples/2/Sample-2-back.pdf',
+            front: 'samples/2/Sample-2-front.pdf',
+            back: 'samples/2/Sample-2-back.pdf',
             frontUV: null,
             backUV: null,
-            frontEmboss: '/samples/2/Sample-2-frontEmboss.pdf'
+            frontEmboss: 'samples/2/Sample-2-frontEmboss.pdf'
         }
     },
     {
@@ -43,10 +43,10 @@ export const SAMPLES = [
             emboss: false
         },
         files: {
-            front: '/samples/3/Sample-3-front.pdf',
-            back: '/samples/3/Sample-3-back.pdf',
-            frontUV: '/samples/3/Sample-3-frontUV.pdf',
-            backUV: '/samples/3/Sample-3-backUV.pdf',
+            front: 'samples/3/Sample-3-front.pdf',
+            back: 'samples/3/Sample-3-back.pdf',
+            frontUV: 'samples/3/Sample-3-frontUV.pdf',
+            backUV: 'samples/3/Sample-3-backUV.pdf',
             frontEmboss: null
         }
     },
@@ -60,11 +60,11 @@ export const SAMPLES = [
             emboss: 'emboss'
         },
         files: {
-            front: '/samples/4/Sample-4-front.pdf',
-            back: '/samples/4/Sample-4-back.pdf',
+            front: 'samples/4/Sample-4-front.pdf',
+            back: 'samples/4/Sample-4-back.pdf',
             frontUV: null,
             backUV: null,
-            frontEmboss: '/samples/4/Sample-4-frontEmboss.pdf'
+            frontEmboss: 'samples/4/Sample-4-frontEmboss.pdf'
         }
     }
 ];
