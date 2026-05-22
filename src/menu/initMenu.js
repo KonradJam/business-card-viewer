@@ -5,6 +5,7 @@ import { disableButtons } from "./disableButtons";
 import { toggleEmboss } from "./toggleEmboss";
 import { setFinishToggle } from "./setFinishToggle";
 import { selectSample } from "./selectSample";
+import { showMenu } from "./showMenu";
 
 export const initMenu = (sceneObjects) => {
     const { card, camera, controls } = sceneObjects;
@@ -22,4 +23,6 @@ export const initMenu = (sceneObjects) => {
     setFinishToggle(card);
 
     disableButtons();
+
+    showMenu();
 };
