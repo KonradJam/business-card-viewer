@@ -206,6 +206,15 @@ body {
   color: #999;
   pointer-events: none;
 }
+
+[data-reset="reset"] {
+  background-color: #ffe3e3;
+}
+
+[data-reset="reset"]:hover {
+  background-color: #ff0000;
+  color: white;
+}
 /* ##### BTN GROUP section STOP ##### */
 
 

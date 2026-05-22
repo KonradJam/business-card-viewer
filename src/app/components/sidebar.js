@@ -7,6 +7,7 @@ import {
 } from '../../card/cardFormats.js';
 import { selectSection } from './selectSection.js';
 import { uploadFile } from './uploadFile.js';
+import { btnSection } from './btnSection.js';
 
 export const sidebar = () => {
     const samplesOptions = '<option value="">Try a prepared example</option>' + SAMPLES.map((sample) => {
@@ -46,13 +47,7 @@ export const sidebar = () => {
 
             <hr class="divider">
 
-                <fieldset class="control-group">
-                    <legend class="control-group__legend">Position reset</legend>
-                    <div class="btn-group">
-                        <button type="button" class="btn-group__btn" data-position="front">Front</button>
-                        <button type="button" class="btn-group__btn" data-position="back">Back</button>
-                    </div>
-                </fieldset>
+                ${btnSection('position', ['front', 'back'])}
 
             <hr class="divider">
 
@@ -70,22 +65,12 @@ export const sidebar = () => {
 
             <hr class="divider">
 
-                <fieldset class="control-group" data-control="paper">
-                    <legend class="control-group__legend">Paper</legend>
-                    <div class="btn-group">
-                        <button type="button" class="btn-group__btn btn-group__btn--active" data-paper="mat">Mat</button>
-                        <button type="button" class="btn-group__btn" data-paper="glossy">Glossy</button>
-                    </div>
-                </fieldset>
+                ${btnSection('paper', ['mat', 'glossy'])}
+                ${btnSection('foil', ['none', 'mat', 'glossy'])}
 
-                <fieldset class="control-group" data-control="foil">
-                    <legend class="control-group__legend">Foil</legend>
-                    <div class="btn-group">
-                        <button type="button" class="btn-group__btn btn-group__btn--active" data-foil="none">None</button>
-                        <button type="button" class="btn-group__btn" data-foil="mat">Mat</button>
-                        <button type="button" class="btn-group__btn" data-foil="glossy">Glossy</button>
-                    </div>
-                </fieldset>
+            <hr class="divider">
+
+                ${btnSection('reset', ['reset'])}
 
         </aside>`
 };
