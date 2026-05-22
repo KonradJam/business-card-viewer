@@ -1,4 +1,4 @@
-export const uploadFile = (side, legend) => {
+export const uploadFileSection = (side, legend) => {
     const toggleEmboss = /*html*/`
         <label class="toggle">
             <span class="toggle__label">Debossing</span>

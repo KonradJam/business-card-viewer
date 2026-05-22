@@ -6,7 +6,8 @@ import {
     DEFAULT_CARD_ORIENTATION
 } from '../../card/cardFormats.js';
 import { selectSection } from './selectSection.js';
-import { uploadFile } from './uploadFile.js';
+import { hintSection } from './hintSection.js';
+import { uploadFileSection } from './uploadFileSection.js';
 import { btnSection } from './btnSection.js';
 
 export const sidebar = () => {
@@ -32,18 +33,13 @@ export const sidebar = () => {
         <aside class="control-panel">
 
                 ${selectSection('sample', 'Samples', samplesOptions)}
-                <p class="control-panel__hint">
-                    or upload your own files 
-                </p>
+                ${hintSection("or upload your own files")}
 
             <hr class="divider">
 
-
                 ${selectSection('card-format', 'Business card format', formatOptions)}
                 ${selectSection('card-orientation', 'Orientation', orientationOptions)}
-                <p class="control-panel__hint">
-                    Changing the format updates the 3D object immediately. 
-                </p>
+                ${hintSection("Changing the format updates the 3D object immediately.")}
 
             <hr class="divider">
 
@@ -51,17 +47,17 @@ export const sidebar = () => {
 
             <hr class="divider">
 
-                ${uploadFile('front', 'Front PDF')}
-                ${uploadFile('back', 'Back PDF')}
+                ${uploadFileSection('front', 'Front PDF')}
+                ${uploadFileSection('back', 'Back PDF')}
 
             <hr class="divider">
 
-                ${uploadFile('frontUV', 'Front spot UV PDF')}
-                ${uploadFile('backUV', 'Back spot UV PDF')}
+                ${uploadFileSection('frontUV', 'Front spot UV PDF')}
+                ${uploadFileSection('backUV', 'Back spot UV PDF')}
 
             <hr class="divider">
 
-                ${uploadFile('frontEmboss', 'Front emboss PDF')}
+                ${uploadFileSection('frontEmboss', 'Front emboss PDF')}
 
             <hr class="divider">
 
