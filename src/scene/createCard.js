@@ -97,7 +97,7 @@ export const createCard = () => {
         for (const [i, [materialObject, modifier]] of materials.entries()) {
             materialObject.displacementMap?.dispose();
             materialObject.displacementMap = i === 0 ? texture : mirrorTexture;
-            materialObject.displacementScale = -1 * modifier * embossState;
+            materialObject.displacementScale = -0.5 * modifier * embossState;
             materialObject.displacementBias = 0.5 * modifier * embossState;
 
             materialObject.bumpMap?.dispose();

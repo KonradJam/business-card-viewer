@@ -9,7 +9,7 @@ export const createLights = () => {
             intensity : 2.3
         },
         secondary : {
-            position : { x : 90, y : 20, z : 140 },
+            position : { x : 90, y : 0, z : 140 },
             intensity: 1.2
         }
     }
