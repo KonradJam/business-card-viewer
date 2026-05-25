@@ -5,24 +5,22 @@ import { disableButtons } from "./disableButtons";
 import { toggleEmboss } from "./toggleEmboss";
 import { setFinishToggle } from "./setFinishToggle";
 import { selectSample } from "./selectSample";
+import { resetButton } from "./resetButton";
 import { showMenu } from "./showMenu";
 
 export const initMenu = (sceneObjects) => {
     const { card, camera, controls } = sceneObjects;
 
     selectSample(card);
-
     selectCardFormatOrientation(card, controls);
-
     selectCameraView(camera, controls);
-
     uploadManager(card);
-
     toggleEmboss(card);
-
     setFinishToggle(card);
-
     disableButtons();
+    resetButton(card, camera, controls);
+
+
 
     showMenu();
 };
