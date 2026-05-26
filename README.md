@@ -1,109 +1,135 @@
-# 3D Business Card Visualizer
-#### Video Demo: [Link]
-#### Final Project for Harvard CS50x
+# 3D Business Card Visualizer: Pre-Press Virtualization Tool
+#### Final Project for Harvard University's CS50x
 #### Author: Konrad Jamroziak
-#### edX Login: Konrad Jamroziak
-#### GitHub Username: Konrad Jam
-#### Location: Kalisz/Poland
+#### Video Demo: [Link]
 
-## Description
+---
 
-The **3D Business Card Visualizer** is a web-based application designed to bridge the gap between technical print preparation and client visualization. As a professional DTP (Desktop Publishing) operator with over a decade of experience, I have frequently encountered a recurring challenge: clients often struggle to imagine how specialized print finishes, such as **Spot UV varnish** or **Embossing**, will look on a physical product. 
+## 📑 Table of Contents
+1. [Introduction](#introduction)
+2. [The Core Problem](#the-core-problem)
+3. [Key Features](#key-features)
+4. [Technical Architecture](#technical-architecture)
+    - [The Rendering Pipeline](#the-rendering-pipeline)
+    - [Special Effects (PBR Materials)](#special-effects-pbr-materials)
+5. [File Structure & Module Breakdown](#file-structure--module-breakdown)
+6. [Design Choices & Challenges](#design-choices--challenges)
+7. [Installation & Local Development](#installation--local-development)
+8. [Usage Guide](#usage-guide)
+9. [Author Information](#author-information)
 
-In the printing industry, these finishes are typically represented in design files as flat, black-and-white graphics. For instance, a black shape on a separate page indicates where the varnish should be applied. While this is perfectly functional for a printing press, it is unintuitive for a customer. The goal of this project is to provide a realistic, interactive 3D environment where these effects are rendered dynamically, allowing users to rotate, flip, and inspect their designs under various lighting conditions.
+---
 
-The application allows users to:
-1.  **Upload Custom Designs:** Users can upload PDF files for the front and back of the card.
-2.  **Visualize Special Finishes:** By uploading separate PDFs for Spot UV or Embossing masks, the app applies these effects in real-time.
-3.  **Adjust Material Properties:** Users can switch between different paper types (Matte/Glossy) and foil finishes.
-4.  **Configure Formats:** Supports standard business card dimensions and orientations (Landscape/Portrait).
-5.  **Interactive Camera:** A fully controllable 3D camera with presets for specific views.
+## 🌟 Introduction
+The **3D Business Card Visualizer** is a high-fidelity web application built to bridge the gap between abstract pre-press production files and human perception. Developed as a final project for **CS50x**, it leverages modern web technologies to simulate professional printing finishes such as **Spot UV Varnish** and **Embossing/Debossing** in an interactive 3D environment.
 
-## Technical Stack
+## 🎯 The Core Problem
+As a DTP (Desktop Publishing) operator with over a decade of industry experience, I have observed a recurring "imagination gap." In the printing world, specialized finishes are represented as flat, black-and-white vector masks. While these files are technically perfect for production, they are incomprehensible to most clients. 
 
-The project is built as a modern web application using the following technologies:
-*   **Three.js:** The core 3D engine used to create the scene, lighting, and the card model. I utilized the `MeshPhysicalMaterial` to simulate realistic optical properties like clearcoat (for varnish) and displacement mapping (for embossing).
-*   **PDF.js:** A powerful library by Mozilla used to parse PDF files. This was crucial because PDF is the industry standard for print. The app renders PDF pages onto a hidden canvas, which is then converted into a `THREE.CanvasTexture`.
-*   **Vite:** Used as the build tool and development server for its speed and efficient module handling.
-*   **Vanilla JavaScript (ES6+):** I chose to avoid heavy frameworks like React or Angular to keep the application lightweight and to demonstrate a deep understanding of DOM manipulation and asynchronous programming.
-*   **CSS3:** Custom styling using modern CSS features like Flexbox, Grid, and Popover API for the user interface.
+This application serves as a **Pre-visualization (Pre-viz) tool**. It takes standard PDF production files and interprets them as physical properties—turning a black mask into a reflective clearcoat layer or a displacement map for tactile embossing.
 
-## File Structure
+## ✨ Key Features
+*   **Real-time PDF Interpretation:** Directly renders PDF pages into high-resolution textures.
+*   **PBR Material Simulation:** Uses Physically Based Rendering to mimic paper, foil, and varnish.
+*   **Dynamic Special Effects:**
+    *   **Spot UV:** Selective reflectivity based on custom masks.
+    *   **Embossing:** Real-time geometry deformation using displacement mapping.
+*   **Camera System:** Intuitive 3D orbit controls with programmatic view presets (Front, Back, Side).
+*   **Customizable Formats:** Support for multiple card dimensions (90x50mm, 85x55mm) in both Portrait and Landscape orientations.
 
-### Project Root
-*   `index.html`: The main entry point that provides the container for the 3D scene and the UI overlay.
-*   `package.json`: Manages project dependencies (`three`, `pdfjs-dist`) and build scripts.
-*   `vite.config.js`: Configuration for the Vite bundler.
+## 🛠 Technical Architecture
 
-### `src/` Folder
-*   `main.js`: Initializes the application by calling `createApp`.
-*   `style.css`: Contains all visual styling for the application, including the sidebar and top bar.
+### The Rendering Pipeline
+The application implements an asynchronous pipeline to handle the heavy lifting of PDF processing:
+1.  **File Ingestion:** PDFs are loaded via `FileReader` or `fetch`.
+2.  **PDF.js Worker:** A background worker parses the PDF and renders it to a hidden `HTMLCanvasElement` at a high resolution (target width of 1600px+) to maintain crispness.
+3.  **Texture Generation:** The canvas is mapped to a `THREE.CanvasTexture` with an `sRGB` color space for accurate color reproduction.
+4.  **GPU Upload:** The texture is passed to the WebGL renderer and applied to the corresponding material slot.
 
-### `src/app/` Folder
-*   `app.js`: Sets up the basic HTML structure of the app and initializes the 3D scene and menu.
-*   `components/`: Contains UI modular components like `sidebar.js`, `btnSection.js`, and `uploadFileSection.js`.
+### Special Effects (PBR Materials)
+I utilized the **`MeshPhysicalMaterial`** in Three.js, which is the most advanced material for simulating real-world physics:
+*   **Clearcoat Layer:** The Spot UV mask is applied to the `clearcoatMap` property, allowing us to control where light reflects without affecting the base color.
+*   **Displacement Mapping:** For embossing, I used a high-poly `BoxGeometry` (400x400 segments). The embossing mask is interpreted as a height map, physically moving the vertices of the card mesh along their normals.
 
-### `src/camera/` Folder
-*   `setCameraView.js` & `viewPresets.js`: Logic for managing camera positions and smooth transitions between different perspectives.
+## 📂 File Structure & Module Breakdown
 
-### `src/card/` Folder
-*   `cardFormats.js`: Defines standard sizes like 90x50mm or 85x55mm.
-*   `finishPresets.js` & `finishUvPresets.js`: Configuration objects for material properties (roughness, clearcoat, etc.).
-*   `getCardDimensions.js`: Helper function to calculate scaled dimensions for the 3D mesh.
+### Core Modules (`src/`)
+*   `main.js`: The application's entry point and bootstrap logic.
+*   `app/app.js`: Orchestrates the UI structure and initial state.
 
-### `src/menu/` Folder
-*   This folder contains the bulk of the UI interaction logic.
-*   `initMenu.js`: Orchestrates the initialization of all UI event listeners.
-*   `uploadManager.js`: Handles the complex logic of linking file inputs to the 3D model.
-*   `selectSample.js`: Loads pre-defined sample files for demonstration.
-*   `toggleEmboss.js` & `setFinishToggle.js`: Logic for switching between different visual states.
+### 🎥 Graphics Engine (`src/scene/` & `src/camera/`)
+*   `createCard.js`: **The Heart of the Project.** Contains the logic for the PBR material, geometry manipulation, and texture swapping.
+*   `initScene.js`: Sets up the WebGL renderer, scene graph, and animation loop.
+*   `viewPresets.js`: Defines the mathematical positions for smooth camera transitions.
 
-### `src/pdf/` Folder
-*   `handlePdfUpload.js`: Acts as a bridge between the file input and the texture renderer.
-*   `renderPdfToTexture.js`: The most technically challenging part of the project. It uses `pdfjs-dist` to render PDF pages to a canvas at high resolution, ensuring the 3D textures remain crisp.
+### 📄 Document Processing (`src/pdf/`)
+*   `renderPdfToTexture.js`: Handles the conversion of PDF vectors into pixel-data textures using PDF.js.
+*   `handlePdfUpload.js`: Middleware logic for file validation and state updates.
 
-### `src/scene/` Folder
-*   `initScene.js`: The main orchestration file for the 3D environment.
-*   `createCard.js`: Defines the 3D geometry and the sophisticated `MeshPhysicalMaterial` setup that allows for multi-layered textures (Color, Varnish, Embossing).
-*   `createLights.js`: Sets up a multi-light system (Ambient, Front, Back) to ensure the card is visible from all angles.
-*   `createRenderer.js`, `createCamera.js`, `createScene.js`: Modular setup for Three.js boilerplate.
+### 🎮 Interface Logic (`src/menu/`)
+*   `uploadManager.js`: Manages the complex state of multiple file inputs (Front, Back, UV, Emboss).
+*   `selectSample.js`: Provides a curated set of sample files to demonstrate the app's capabilities.
 
-## Design Choices
+## 🧠 Design Choices & Challenges
 
-One of the major technical decisions was using **displacement mapping** for the embossing effect. Initially, I considered using normal maps, but normal maps only simulate how light interacts with a surface without actually moving the vertices. Displacement mapping, combined with a high-poly geometry (`BoxGeometry` with 400x400 segments), allows the card to actually physically deform in the 3D space, which is much more realistic for showing the tactile nature of embossing.
+### 1. Performance vs. Quality
+Using `DisplacementMapping` requires a high-density vertex grid. To keep the app performing at 60 FPS while maintaining visual quality, I optimized the vertex count to a sweet spot (400x400) and implemented proper texture disposal to prevent memory leaks during file uploads.
 
-Another challenge was **PDF color spaces**. Print PDFs often use CMYK, but Three.js and web canvases operate in RGB. I implemented the texture rendering in a way that converts the PDF data into an `sRGB` color space texture, ensuring visual consistency on most monitors.
+### 2. Why Vanilla JavaScript?
+While frameworks like React are popular, I chose **Vanilla JavaScript (ES6+)**. This was a deliberate architectural decision to:
+*   Demonstrate mastery over the DOM and browser APIs.
+*   Maintain a lightweight footprint without the overhead of heavy abstractions.
+*   Showcase "clean code" principles through modularity and separation of concerns.
 
-For the **Spot UV varnish**, I utilized the `clearcoat` properties of Three.js. By applying the UV mask PDF as a `clearcoatMap`, I can make specific parts of the card more reflective than others, perfectly mimicking how varnish sits on top of paper.
+### 3. Lighting Complexity
+A business card is a thin object. To make it look "real," I had to implement a three-point lighting system (Key, Fill, and Rim) that rotates with the camera or remains static to highlight the glossiness of the Spot UV varnish.
 
-## Installation & Usage
+## 🚀 Installation & Local Development
 
-To run this project locally, you will need [Node.js](https://nodejs.org/) installed on your machine.
+### Prerequisites
+*   [Node.js](https://nodejs.org/) (v16.0.0 or higher)
+*   [npm](https://www.npmjs.com/) (usually bundled with Node.js)
 
-1.  **Clone the repository:**
+### Setup
+1.  **Clone the Repository:**
     ```bash
-    git clone [INSERT REPO URL]
+    git clone https://github.com/konradjam/business-card-viewer.git
     cd business-card-viewer
     ```
 
-2.  **Install dependencies:**
+2.  **Install Dependencies:**
     ```bash
     npm install
     ```
 
-3.  **Start the development server:**
+3.  **Run Development Server:**
     ```bash
     npm run dev
     ```
 
-4.  **Open the application:**
-    Vite will provide a local URL (usually `http://localhost:5173`). Open this in your browser.
+4.  **Build for Production:**
+    ```bash
+    npm run build
+    ```
 
-5.  **Using the App:**
-    *   Use the **Sidebar** to load a sample project to see the effects in action.
-    *   Rotate the card using your mouse (Left-click to rotate, Right-click to pan, Scroll to zoom).
-    *   Upload your own PDFs to test your designs! Note: For best results, ensure your PDF masks for UV/Embossing are black on a white or transparent background.
+## 📖 Usage Guide
+1.  **Exploration:** Use the **Samples** section in the sidebar to see how the app handles complex designs.
+2.  **Custom Upload:** 
+    *   Upload a `Front.pdf` and `Back.pdf`.
+    *   Upload a `SpotUV.pdf` (Black/White mask) to see the gloss effect.
+    *   Upload an `Emboss.pdf` to see the card physically deform.
+3.  **Interaction:** Use your mouse to rotate (Left Click), pan (Right Click), and zoom (Scroll). 
+4.  **Views:** Use the camera preset buttons to quickly snap to the Front or Back view.
 
-## Acknowledgments
+---
 
-This project was developed as a final submission for **CS50x: Introduction to the Computer Science** from Harvard University. Special thanks to the CS50 team for an incredible learning journey.
+## 👤 Author Information
+*   **Name:** Konrad Jamroziak
+*   **edX Login:** Konrad Jamroziak
+*   **GitHub:** KonradJam
+*   **Background:** 15+ years of DTP and Pre-press Expertise.
+
+> This project is a final submission for **CS50x 2026**.
+
+---
+*Generated by the author as part of the CS50x curriculum.*
