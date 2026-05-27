@@ -1,7 +1,7 @@
 # 3D Business Card Visualizer: Pre-Press Virtualization Tool
 #### Final Project for Harvard University's CS50x
 #### Author: Konrad Jamroziak
-#### Video Demo: [Link]
+#### Video Demo: [YouTube](https://youtu.be/hn1Gp2mjQiI)
 
 ---
 
