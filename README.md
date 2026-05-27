@@ -7,21 +7,25 @@
 
 ## 📑 Table of Contents
 1. [Introduction](#introduction)
-2. [The Core Problem](#the-core-problem)
-3. [Key Features](#key-features)
-4. [Technical Architecture](#technical-architecture)
+2. [Demo](#demo)
+3. [The Core Problem](#the-core-problem)
+4. [Key Features](#key-features)
+5. [Technical Architecture](#technical-architecture)
     - [The Rendering Pipeline](#the-rendering-pipeline)
     - [Special Effects (PBR Materials)](#special-effects-pbr-materials)
-5. [File Structure & Module Breakdown](#file-structure--module-breakdown)
-6. [Design Choices & Challenges](#design-choices--challenges)
-7. [Installation & Local Development](#installation--local-development)
-8. [Usage Guide](#usage-guide)
-9. [Author Information](#author-information)
+6. [File Structure & Module Breakdown](#file-structure--module-breakdown)
+7. [Design Choices & Challenges](#design-choices--challenges)
+8. [Installation & Local Development](#installation--local-development)
+9. [Usage Guide](#usage-guide)
+10. [Author Information](#author-information)
 
 ---
 
 ## 🌟 Introduction
 The **3D Business Card Visualizer** is a high-fidelity web application built to bridge the gap between abstract pre-press production files and human perception. Developed as a final project for **CS50x**, it leverages modern web technologies to simulate professional printing finishes such as **Spot UV Varnish** and **Embossing/Debossing** in an interactive 3D environment.
+
+## Demo
+![Demo](./assets/demo.gif)
 
 ## 🎯 The Core Problem
 As a DTP (Desktop Publishing) operator with over a decade of industry experience, I have observed a recurring "imagination gap." In the printing world, specialized finishes are represented as flat, black-and-white vector masks. While these files are technically perfect for production, they are incomprehensible to most clients. 
