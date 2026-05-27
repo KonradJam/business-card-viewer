@@ -24,7 +24,7 @@
 ## 🌟 Introduction
 The **3D Business Card Visualizer** is a high-fidelity web application built to bridge the gap between abstract pre-press production files and human perception. Developed as a final project for **CS50x**, it leverages modern web technologies to simulate professional printing finishes such as **Spot UV Varnish** and **Embossing/Debossing** in an interactive 3D environment.
 
-## Demo
+## 😍 Demo
 ![Demo](./assets/demo.gif)
 
 ## 🎯 The Core Problem
