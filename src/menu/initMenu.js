@@ -7,9 +7,10 @@ import { setFinishToggle } from "./setFinishToggle";
 import { selectSample } from "./selectSample";
 import { resetButton } from "./resetButton";
 import { showMenu } from "./showMenu";
+import { recorderButtons } from "./recorderButtons";
 
 export const initMenu = (sceneObjects) => {
-    const { card, camera, controls } = sceneObjects;
+    const { card, camera, controls, renderer } = sceneObjects;
 
     selectSample(card);
     selectCardFormatOrientation(card, controls);
@@ -19,7 +20,7 @@ export const initMenu = (sceneObjects) => {
     setFinishToggle(card);
     disableButtons();
     resetButton(card, camera, controls);
-
+    recorderButtons(renderer.domElement)
 
 
     showMenu();

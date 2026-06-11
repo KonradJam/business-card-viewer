@@ -1,7 +1,7 @@
 import { createSceneContainer } from '../scene/createSceneContainer.js';
 import { initMenu } from '../menu/initMenu.js';
 import { sidebar } from './components/sidebar.js';
-import { recorderSection } from './components/recorderSextion.js';
+import { recorderSection } from './components/recorderSection.js';
 
 export const createApp = () => {
     const app = document.querySelector('#app');
