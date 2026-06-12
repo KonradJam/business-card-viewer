@@ -15,6 +15,8 @@ export const recorderButtons = (canvas) => {
         textButtons.forEach(btn => {
             btn.classList.add('btn-group__text--red');
         });
+
+        downloadButton.disabled = true;
     });
 
     stopButton.addEventListener('click', () => {
