@@ -7,7 +7,7 @@ export const recorderSection = () => {
                 <span class="btn-group__text">REC</span>
             </button>
             <button class="btn-group__btn" id="recorder-stop">&#9209;</button>
-            <button class="btn-group__btn" id="recorder-download" disabled>&#11123;</button>
+            <button class="btn-group__btn btn-group__btn--blue" id="recorder-download" disabled>&#11123;</button>
             </div>
         </aside>
     `;

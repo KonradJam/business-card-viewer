@@ -423,6 +423,16 @@ body {
 .btn-group__text--red {
   color: red;
 }
+
+.btn-group__btn--blue:not(:disabled) {
+  background-color: rgb(129, 194, 255);
+  color: white;
+}
+
+.btn-group__btn--blue:not(:disabled):hover {
+  background-color: rgb(42, 150, 250);
+  color: white;
+}
 /* ##### RECORDER section STOP ##### */
 
 
