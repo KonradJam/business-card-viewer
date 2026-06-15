@@ -40,7 +40,7 @@ This application serves as a **Pre-visualization (Pre-viz) tool**. It takes stan
     *   **Embossing:** Real-time geometry deformation using displacement mapping.
 *   **Camera System:** Intuitive 3D orbit controls with programmatic view presets (Front, Back, Side).
 *   **Customizable Formats:** Support for multiple card dimensions (90x50mm, 85x55mm) in both Portrait and Landscape orientations.
-*   **Recording:** Ability to record visualizations and generate a video file.
+*   **Recording:** Ability to record visualizations and generate a video file..
 
 ## 🛠 Technical Architecture
 
