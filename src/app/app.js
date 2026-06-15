@@ -1,6 +1,7 @@
 import { createSceneContainer } from '../scene/createSceneContainer.js';
 import { initMenu } from '../menu/initMenu.js';
 import { sidebar } from './components/sidebar.js';
+import { recorderSection } from './components/recorderSection.js';
 
 export const createApp = () => {
     const app = document.querySelector('#app');
@@ -18,6 +19,7 @@ export const createApp = () => {
             <main class="workspace">
                 <div id="scene-container" class="workspace__scene"></div>
                 ${sidebar()}
+                ${recorderSection()}
             </main>
         </div>
     `;

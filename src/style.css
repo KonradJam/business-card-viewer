@@ -225,6 +225,8 @@ body {
   font-size: 13px;
   line-height: 1;
   transition: 0.2s ease;
+
+  white-space: nowrap;
 }
 
 .btn-group__btn:hover {
@@ -392,6 +394,46 @@ body {
 }
 /* ##### TOGGLE section STOP ##### */
 
+
+
+/* ##### RECORDER section START ##### */
+.recorder-panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  position: absolute;
+  z-index: 4;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.5rem;
+
+  border-radius: 1rem;
+
+  background: rgba(255, 255, 255, 0.28);
+
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+
+  box-shadow:
+    0 8px 30px rgba(17, 17, 17, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.btn-group__text--red {
+  color: red;
+}
+
+.btn-group__btn--blue:not(:disabled) {
+  background-color: rgb(129, 194, 255);
+  color: white;
+}
+
+.btn-group__btn--blue:not(:disabled):hover {
+  background-color: rgb(42, 150, 250);
+  color: white;
+}
+/* ##### RECORDER section STOP ##### */
 
 
 .divider {
